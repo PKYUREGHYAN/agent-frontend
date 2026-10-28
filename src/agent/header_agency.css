@@ -1,0 +1,174 @@
+.agent-header-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: #091220;
+    border-bottom: 1px solid #1a2f4c;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.agent-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.agent-logo-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #c9a227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.agent-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agent-logo-fallback {
+    color: #38bdf8;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+}
+
+.agent-text-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.agent-title-main {
+    font-size: 22px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.agent-title-main span {
+    color: #38bdf8;
+}
+
+.agent-title-badge {
+    background: #0284c7;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.agent-subtitle {
+    font-size: 11px;
+    color: #7b93b2;
+    margin: 3px 0 0 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.agent-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.agent-counter-btn {
+    background: #0d1e33;
+    border: 1px solid #22436b;
+    color: #93c5fd;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.agent-counter-btn:hover {
+    border-color: #38bdf8;
+    background: #122b49;
+}
+
+.agent-counter-btn.empty {
+    border-color: #ef4444;
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.agent-buy-badge {
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.agent-profile-btn,
+.agent-tariffs-btn {
+    background: #11253e;
+    border: 1px solid #244873;
+    color: #cbd5e1;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.agent-profile-btn:hover,
+.agent-tariffs-btn:hover {
+    background: #19385d;
+    color: #fff;
+    border-color: #38bdf8;
+}
+
+.agent-logout-btn {
+    background: transparent;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.agent-logout-btn:hover {
+    background: #1e293b;
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+.agent-login-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: all 0.2s;
+}
+
+.agent-login-btn:hover {
+    background: #1d4ed8;
+}

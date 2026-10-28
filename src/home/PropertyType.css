@@ -1,0 +1,458 @@
+/* ===================================================
+   Telegram AI Chat - PropertyType Stylesheet
+   File: PropertyType.css
+   =================================================== */
+
+:root {
+    --tg-primary: #3390ec;
+    --tg-primary-hover: #2b82db;
+    --tg-primary-active: #1d72c6;
+    --tg-primary-glow: rgba(51, 144, 236, 0.35);
+
+    --tg-bg-page: #0b111a;
+    --tg-bg-card: #17212b;
+    --tg-bg-card-border: rgba(255, 255, 255, 0.08);
+
+    --tg-bg-item: #202b37;
+    --tg-bg-item-hover: #263443;
+    --tg-bg-item-selected: rgba(51, 144, 236, 0.16);
+    --tg-border-selected: #3390ec;
+
+    --tg-text-main: #f5f5f5;
+    --tg-text-secondary: #7e94aa;
+    --tg-text-muted: #5c6e80;
+
+    --tg-accent-green: #34d399;
+    --tg-accent-green-bg: rgba(52, 211, 153, 0.15);
+
+    --tg-shadow-card: 0 24px 60px -15px rgba(0, 0, 0, 0.8),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px var(--tg-bg-card-border);
+}
+
+/* 1. Էջի ֆոն */
+.property-type-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: var(--tg-bg-page);
+    background-image:
+            radial-gradient(circle at 10% 12%, rgba(51, 144, 236, 0.2) 0%, transparent 45%),
+            radial-gradient(circle at 90% 88%, rgba(0, 210, 255, 0.14) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(23, 33, 43, 0.65) 0%, transparent 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 2. Քարտ (Card) - Լայնությունը դինամիկ հարմարեցված (2 կամ 3 սյունակ) */
+.property-type-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 740px;
+    background: var(--tg-bg-card);
+    border-radius: 26px;
+    padding: 38px 40px;
+    box-shadow: var(--tg-shadow-card);
+    border: 1px solid var(--tg-bg-card-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-sizing: border-box;
+    animation: cardSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: max-width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.property-type-card.has-subtypes {
+    max-width: 1060px;
+}
+
+@keyframes cardSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 3. Header_agency */
+.property-type-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.property-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: rgba(51, 144, 236, 0.15);
+    border: 1px solid rgba(51, 144, 236, 0.3);
+    color: #60a5fa;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+}
+
+.property-type-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--tg-text-main);
+    letter-spacing: -0.02em;
+    margin: 0 0 8px 0;
+}
+
+.property-type-header p {
+    font-size: 14.5px;
+    color: var(--tg-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.property-type-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin: 10px auto 0;
+    width: fit-content;
+}
+
+/* 4. Selection Grid (2 կամ 3 սյունակ) */
+.property-type-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 32px;
+    transition: all 0.3s ease;
+}
+
+.property-type-selection.has-subtypes {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.selection-column-subtypes {
+    animation: columnSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes columnSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.selection-column {
+    display: flex;
+    flex-direction: column;
+    background: rgba(14, 22, 33, 0.5);
+    border: 1px solid var(--tg-bg-card-border);
+    border-radius: 20px;
+    padding: 18px 16px;
+    min-height: 380px;
+}
+
+.selection-column h2 {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tg-primary);
+    margin: 0 0 14px 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.selection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 5. Selection Item */
+.selection-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 13px;
+    background: var(--tg-bg-item);
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    color: var(--tg-text-main);
+    font-size: 13.5px;
+    font-family: inherit;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.selection-item:hover {
+    background: var(--tg-bg-item-hover);
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.selection-item.selected {
+    background: var(--tg-bg-item-selected);
+    border-color: var(--tg-border-selected);
+    box-shadow: 0 0 0 1px var(--tg-border-selected), 0 4px 16px var(--tg-primary-glow);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* 6. Selection Indicator */
+.selection-indicator {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    transition: all 0.2s ease;
+    background: transparent;
+    flex-shrink: 0;
+}
+
+.selection-item:hover .selection-indicator {
+    border-color: var(--tg-primary);
+}
+
+.selection-item.selected .selection-indicator {
+    background: var(--tg-primary);
+    border-color: var(--tg-primary);
+    box-shadow: 0 0 8px var(--tg-primary-glow);
+}
+
+.selection-text {
+    flex: 1;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.selection-tag {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #94a3b8;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+/* 7. Footer */
+.property-type-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 22px;
+    border-top: 1px solid var(--tg-bg-card-border);
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.selection-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--tg-text-muted);
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+
+.selection-status span.status-done {
+    color: var(--tg-accent-green);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.selection-status span.status-done::before {
+    content: "✓";
+    font-size: 11px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--tg-accent-green-bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===================================================
+   7.1. Footer Buttons Group
+   =================================================== */
+.property-type-footer-buttons {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ===================================================
+   7.2. Back to Main Menu Button (← Գլխավոր մենյու)
+   =================================================== */
+.back-to-main-menu-button {
+    height: 48px;
+    padding: 0 22px;
+    background: rgba(255, 255, 255, 0.04);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.12) 100%);
+    color: var(--tg-text-secondary);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+    text-decoration: none;
+    user-select: none;
+    outline: none;
+}
+
+.back-to-main-menu-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(51, 144, 236, 0.45);
+    color: #ffffff;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(51, 144, 236, 0.2);
+}
+
+.back-to-main-menu-button:active {
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateY(1px);
+    border-color: var(--tg-primary);
+}
+
+.back-to-main-menu-button span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: -0.01em;
+}
+
+/* 8. Continue Button */
+.continue-button {
+    height: 48px;
+    padding: 0 28px;
+    background: var(--tg-primary);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.06) 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px var(--tg-primary-glow);
+    transition: all 0.22s ease;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.continue-button:hover:not(:disabled) {
+    background-color: var(--tg-primary-hover);
+    box-shadow: 0 8px 24px var(--tg-primary-glow);
+    transform: translateY(-1.5px);
+}
+
+.continue-button:active:not(:disabled) {
+    background-color: var(--tg-primary-active);
+    transform: translateY(1px);
+}
+
+.continue-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* 9. Responsive (Մոբայլ հարմարեցում) */
+@media (max-width: 920px) {
+    .property-type-selection,
+    .property-type-selection.has-subtypes {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .selection-column {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .property-type-card {
+        padding: 26px 18px;
+        border-radius: 20px;
+    }
+
+    .property-type-header h1 {
+        font-size: 22px;
+    }
+
+    .property-type-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .selection-status {
+        justify-content: center;
+    }
+
+    .property-type-footer-buttons {
+        width: 100%;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .back-to-main-menu-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .continue-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

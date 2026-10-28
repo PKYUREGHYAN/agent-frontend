@@ -1,0 +1,368 @@
+/* =========================================================
+   Telegram AI Chat Header_agency - CSS (Պահպանված գույներ)
+   Գույներ՝ #0b111a, #3390ec, #1d72c6, #ffffff, #7e94aa, red
+   ========================================================= */
+
+.app-header {
+    width: 100%;
+    min-height: 74px;
+    padding: env(safe-area-inset-top) 32px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* Օրիգինալ մուգ ապակեպատ երանգ */
+    background: linear-gradient(180deg, rgba(14, 22, 34, 0.95) 0%, rgba(11, 17, 26, 0.96) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    /* Փափուկ խորություն և վերին եզրային լուսավորություն */
+    box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ներքևի եզրագծի կապույտ լուսավորում */
+.app-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(51, 144, 236, 0.45) 50%,
+            transparent 100%
+    );
+    pointer-events: none;
+}
+
+/* --- Լոգոյի հատված --- */
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: default;
+}
+
+.header-logo-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.header-logo-badge {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+            135deg,
+            rgba(51, 144, 236, 0.22) 0%,
+            rgba(29, 114, 198, 0.1) 100%
+    );
+    border: 1px solid rgba(51, 144, 236, 0.35);
+    box-shadow: 0 4px 16px rgba(51, 144, 236, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-logo:hover .header-logo-badge {
+    transform: translateY(-1px) scale(1.03);
+    border-color: rgba(51, 144, 236, 0.55);
+    box-shadow: 0 6px 20px rgba(51, 144, 236, 0.3);
+}
+
+.header-logo-icon {
+    width: 22px;
+    height: 22px;
+    color: #3390ec;
+    filter: drop-shadow(0 1px 4px rgba(51, 144, 236, 0.4));
+}
+
+.header-logo-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #3390ec;
+    border: 2px solid #0b111a;
+    box-shadow: 0 0 12px rgba(51, 144, 236, 0.9);
+    animation: headerGlowPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes headerGlowPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(51, 144, 236, 0.7);
+    }
+    50% {
+        transform: scale(1.22);
+        box-shadow: 0 0 18px rgba(51, 144, 236, 1);
+    }
+}
+
+.header-brand-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.header-brand-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #ffffff;
+    font-size: 16.5px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.header-brand-chat {
+    color: #9cb1c5;
+    font-weight: 500;
+}
+
+.header-ai-pill {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #3390ec;
+    background: rgba(51, 144, 236, 0.14);
+    border: 1px solid rgba(51, 144, 236, 0.32);
+    padding: 1.5px 6px;
+    border-radius: 6px;
+}
+
+.header-brand-subtitle {
+    font-size: 11px;
+    color: #7e94aa;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-brand-subtitle-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.8);
+}
+
+/* --- Օգտատիրոջ պրոֆիլ --- */
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.header-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px 6px 6px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-profile:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.09);
+}
+
+.header-avatar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-avatar {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3390ec 0%, #1d72c6 100%);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+}
+
+.header-avatar-status {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #4ade80;
+    border: 2px solid #0b111a;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
+}
+
+.header-avatar-status::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1.5px solid #4ade80;
+    opacity: 0.6;
+    animation: statusRingPulse 2.2s infinite ease-out;
+}
+
+@keyframes statusRingPulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.9); opacity: 0; }
+}
+
+.header-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+}
+
+.header-user-top {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-user-info strong {
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.header-verified-icon {
+    width: 14px;
+    height: 14px;
+    color: #3390ec;
+    filter: drop-shadow(0 0 4px rgba(51, 144, 236, 0.5));
+}
+
+.header-user-info span {
+    color: #7e94aa;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* --- Ելքի կոճակ («Դուրս գալ») --- */
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.09) 0%, rgba(239, 68, 68, 0.05) 100%);
+    color: #fca5a5;
+    padding: 8.5px 15px;
+    border-radius: 11px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logout-button:hover {
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.18) 0%, rgba(239, 68, 68, 0.12) 100%);
+    border-color: rgba(239, 68, 68, 0.45);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.25);
+    transform: translateY(-1px);
+}
+
+.logout-button:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.logout-icon {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s ease;
+}
+
+.logout-button:hover .logout-icon {
+    transform: translateX(2px);
+}
+
+/* --- Ադապտիվ կարգավորումներ (Mobile) --- */
+@media (max-width: 650px) {
+    .app-header {
+        padding: env(safe-area-inset-top) 14px 0;
+        min-height: 64px;
+    }
+    .header-brand-subtitle {
+        display: none;
+    }
+    .header-user-info {
+        display: none;
+    }
+    .header-logo {
+        gap: 10px;
+    }
+    .header-logo-badge {
+        width: 36px;
+        height: 36px;
+    }
+    .header-logo-icon {
+        width: 18px;
+        height: 18px;
+    }
+    .header-brand-title {
+        font-size: 15px;
+    }
+    .header-user {
+        gap: 10px;
+    }
+    .header-profile {
+        padding: 0;
+        background: transparent;
+        border: none;
+    }
+    .header-avatar {
+        width: 36px;
+        height: 36px;
+    }
+    .logout-button {
+        padding: 7px 11px;
+        font-size: 12px;
+    }
+}

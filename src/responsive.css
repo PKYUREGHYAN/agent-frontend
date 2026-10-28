@@ -1,0 +1,259 @@
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  overflow-wrap: anywhere;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+.share-link-row {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-link-row a {
+  color: #7dd3fc;
+}
+
+.app-container,
+.app-main-content,
+.home-page,
+.home-container,
+.todo-container,
+.todo-wrapper,
+.listing-demo-container,
+.cv-page-container,
+.property-type-page,
+.property-form-page,
+.house-form-page,
+.house-rent-page,
+.house-sale-page,
+.apartment-sale-page,
+.commercial-form-page {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.app-header,
+.header-user,
+.agent-header-box,
+.agent-header-right,
+.menu-top-row,
+.search-bar-box,
+.cv-top-panel-wrapper,
+.cv-badge-header-row,
+.cv-share-messengers-group,
+.todo-header,
+.todo-header-actions,
+.pf-top-header,
+.pf-bottom-actions {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1280px) {
+  .app-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .home-container,
+  .main-menu-container,
+  .todo-wrapper {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-menu-wrapper,
+  .todo-admin-page,
+  .home-page,
+  .listing-page,
+  .client-view,
+  .cv-page-container,
+  .property-type-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .agent-header-box {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .property-type-selection.has-subtypes,
+  .property-type-selection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-top-row,
+  .todo-header,
+  .todo-header-actions,
+  .user-card,
+  .user-info-section,
+  .header-user,
+  .app-header,
+  .agent-header-box,
+  .search-bar-box,
+  .cv-share-messengers-group,
+  .pf-bottom-actions,
+  .active-selection-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .main-menu-container,
+  .todo-container,
+  .login-container,
+  .login-card {
+    max-width: 100%;
+  }
+
+  button,
+  .btn-add-user,
+  .continue-btn,
+  .continue-button,
+  .choice-btn,
+  .logout-button,
+  .btn-start,
+  .pf-btn-primary,
+  .hf-btn-primary,
+  .hr-btn-submit {
+    min-height: 44px;
+  }
+
+  .search-input-field {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .choices-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .login-page {
+    padding: 16px 12px 28px;
+    align-items: flex-start;
+  }
+
+  .login-container {
+    grid-template-columns: 1fr;
+  }
+
+  .login-showcase-banner {
+    display: none;
+  }
+
+  .slc-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .cv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-page-container,
+  .cv-top-panel-wrapper {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .menu-title {
+    font-size: 28px;
+  }
+
+  .header-user-info {
+    display: none;
+  }
+
+  .agent-subtitle {
+    display: none;
+  }
+
+  .system-indicator {
+    max-width: 100%;
+  }
+
+  .system-text {
+    overflow-wrap: anywhere;
+  }
+
+  .pf-pill-group,
+  .pf-number-row,
+  .pf-price-input-row {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .main-menu-wrapper {
+    padding: 16px 12px 28px;
+    align-items: flex-start;
+  }
+
+  .menu-title {
+    font-size: 24px;
+  }
+
+  .choice-title {
+    font-size: 22px;
+  }
+
+  .app-header {
+    min-height: 64px;
+    gap: 8px;
+  }
+
+  .lang-switch {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .main-menu-container,
+  .home-container,
+  .todo-wrapper,
+  .property-type-card {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (pointer: coarse) {
+  .lang-btn,
+  .logout-button,
+  .choice-btn,
+  .cv-btn-copy-link,
+  .cv-circle-icon-btn {
+    min-height: 44px;
+  }
+}

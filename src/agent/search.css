@@ -1,0 +1,153 @@
+.search-component-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.search-bar-box {
+    display: flex;
+    align-items: center;
+    background: #0b1524;
+    border: 2px solid #2563eb;
+    border-radius: 14px;
+    padding: 6px 8px 6px 16px;
+    gap: 12px;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+    flex-wrap: wrap;
+}
+
+.search-label {
+    font-size: 13px;
+    font-weight: 800;
+    color: #38bdf8;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.search-input-field {
+    flex: 1;
+    min-width: 200px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-input-field::placeholder {
+    color: #64748b;
+}
+
+.btn-login-inline {
+    background: transparent;
+    color: #38bdf8;
+    border: 1px solid #2563eb;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #2563eb, #0284c7);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.btn-start:hover:not(:disabled) {
+    background: linear-gradient(135deg, #1d4ed8, #0369a1);
+    transform: scale(1.02);
+}
+
+.btn-start:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.search-demo-chips-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 12px;
+}
+
+.demo-chips-label {
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.demo-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38bdf8;
+}
+
+.demo-chip-btn {
+    background: #0f1c30;
+    border: 1px solid #1c3656;
+    color: #cbd5e1;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.demo-chip-btn:hover {
+    background: #182e4e;
+    color: #38bdf8;
+    border-color: #38bdf8;
+}
+
+.search-progress-panel {
+    background: #0a1322;
+    border: 1px solid #1a3250;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+.search-progress-track {
+    width: 100%;
+    height: 6px;
+    background: #101e33;
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.search-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+    transition: width 0.3s ease;
+}
+
+.search-progress-status-text {
+    font-size: 11px;
+    color: #64748b;
+}

@@ -1,0 +1,1155 @@
+/* ==========================================================================
+   HouseSaleForm.css - Dark Tech Clean Aesthetic
+   ========================================================================== */
+
+.house-sale-page {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: #0b1120;
+    color: #f8fafc;
+    padding: 24px 20px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Toast Notification */
+.house-sale-page .toast-notification {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.5), 0 8px 10px -6px rgba(2, 132, 199, 0.3);
+    z-index: 9999;
+    animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Return Header_agency Bar */
+.house-sale-page .return-header-container {
+    max-width: 900px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.house-sale-page .btn-back-link {
+    background: none;
+    border: none;
+    color: #38bdf8;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .btn-back-link:hover {
+    background-color: rgba(56, 189, 248, 0.1);
+    color: #7dd3fc;
+}
+
+.house-sale-page .page-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+
+/* Form Main Card */
+.house-sale-page .form-main-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #111827;
+    border: 1px solid #1f293d;
+    border-radius: 16px;
+    padding: 32px 36px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 640px) {
+    .house-sale-page .form-main-card {
+        padding: 20px 16px;
+    }
+}
+
+.house-sale-page .form-title-wrapper {
+    margin-bottom: 28px;
+    border-bottom: 1px solid #1f293d;
+    padding-bottom: 18px;
+}
+
+.house-sale-page .page-main-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 6px;
+    letter-spacing: -0.3px;
+}
+
+.house-sale-page .page-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Sections */
+.house-sale-page .form-section {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.house-sale-page .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.house-sale-page .field-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+.house-sale-page .field-description {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin: 0 0 12px;
+}
+
+.house-sale-page .required-star {
+    color: #f43f5e;
+    font-weight: bold;
+}
+
+/* Radio / Checkbox Vertical Group */
+.house-sale-page .radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.house-sale-page .custom-radio-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .custom-radio-row:hover {
+    border-color: #64748b;
+    background-color: #131d33;
+}
+
+.house-sale-page .radio-text-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.house-sale-page .radio-text-desc {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 2px;
+    line-height: 1.4;
+}
+
+/* Chips Buttons Flex Row */
+.house-sale-page .chips-flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.house-sale-page .chip-btn {
+    background-color: #0f172a;
+    border: 1.5px solid #334155;
+    color: #cbd5e1;
+    padding: 8.5px 18px;
+    border-radius: 9px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.house-sale-page .chip-btn:hover {
+    background-color: #1a263d;
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+}
+
+.house-sale-page .chip-btn:active {
+    transform: scale(0.96);
+}
+
+.house-sale-page .chip-btn.selected {
+    background-color: #1e293b;
+    border-color: #38bdf8;
+    color: #f8fafc;
+    font-weight: 600;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Round/circular number chips for rooms, floors, bathrooms */
+.house-sale-page .chip-btn-square {
+    min-width: 44px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    border: 1.5px solid #334155;
+    background-color: #0f172a;
+    color: #cbd5e1;
+    box-shadow: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.house-sale-page .chip-btn-square:hover {
+    background-color: #1a263d;
+    border-color: #38bdf8;
+    color: #ffffff;
+}
+
+.house-sale-page .chip-btn-square:active {
+    transform: scale(0.95);
+}
+
+.house-sale-page .chip-btn-square.selected {
+    background-color: #1e293b;
+    border-color: #38bdf8;
+    color: #f8fafc;
+    font-weight: 700;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Checkbox as Chip Button */
+.house-sale-page .chip-checkbox-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background-color: #0f172a;
+    border: 1.5px solid #334155;
+    color: #cbd5e1;
+    padding: 8.5px 16px;
+    border-radius: 9px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    position: relative;
+    box-shadow: none;
+}
+
+.house-sale-page .chip-checkbox-btn:hover {
+    background-color: #1a263d;
+    border-color: #38bdf8;
+    color: #ffffff;
+}
+
+.house-sale-page .chip-checkbox-btn:active {
+    transform: scale(0.96);
+}
+
+.house-sale-page .chip-checkbox-btn.selected {
+    background-color: #1e293b;
+    border-color: #38bdf8;
+    color: #f8fafc;
+    font-weight: 600;
+    box-shadow: none;
+    transform: none;
+}
+
+.house-sale-page .chip-box-indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid #64748b;
+    background-color: rgba(15, 23, 42, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    font-size: 12px;
+}
+
+.house-sale-page .chip-checkbox-btn:hover .chip-box-indicator {
+    border-color: #38bdf8;
+}
+
+.house-sale-page .chip-checkbox-btn.selected .chip-box-indicator {
+    background-color: #38bdf8;
+    border-color: #38bdf8;
+    color: #0f172a;
+    box-shadow: none;
+    transform: none;
+    font-weight: bold;
+}
+
+/* Horizontal Field Rows for Location section */
+.house-sale-page .hf-field-row-horizontal {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 680px) {
+    .house-sale-page .hf-field-row-horizontal {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
+
+.house-sale-page .hf-field-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #9cb1c9;
+}
+
+.house-sale-page .hf-select-trigger {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #131d2a;
+    border: 1.5px solid #2a3a4d;
+    border-radius: 10px;
+    color: #f8fafc;
+    padding: 11px 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.house-sale-page .hf-select-trigger:hover,
+.house-sale-page .hf-select-trigger.open {
+    border-color: #38bdf8;
+    background-color: #172435;
+}
+
+.house-sale-page .hf-select-trigger.has-error {
+    border-color: #f43f5e;
+}
+
+.house-sale-page .hf-trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.house-sale-page .hf-pin-active {
+    color: #38bdf8;
+}
+
+.house-sale-page .hf-pin-muted {
+    color: #64748b;
+}
+
+.house-sale-page .hf-selected-text {
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.house-sale-page .hf-placeholder {
+    color: #64748b;
+}
+
+.house-sale-page .hf-chevron {
+    color: #94a3b8;
+    transition: transform 0.2s ease;
+}
+
+.house-sale-page .hf-chevron.open {
+    transform: rotate(180deg);
+}
+
+.house-sale-page .hf-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.house-sale-page .hf-region-popover {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #131d2a;
+    border: 1.5px solid #2a3a4d;
+    border-radius: 12px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+    z-index: 50;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.house-sale-page .hf-search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.house-sale-page .hf-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+}
+
+.house-sale-page .hf-dropdown-search {
+    width: 100%;
+    box-sizing: border-box;
+    background: #0c141f;
+    border: 1.5px solid #2a3a4d;
+    border-radius: 9px;
+    padding: 9px 12px 9px 36px;
+    color: #f8fafc;
+    font-size: 13.5px;
+    outline: none;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .hf-dropdown-search:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.house-sale-page .hf-dropdown-search::placeholder {
+    color: #64748b;
+}
+
+.house-sale-page .hf-region-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 380px;
+    padding-right: 4px;
+    flex: 1 1 auto;
+}
+
+.house-sale-page .hf-region-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.house-sale-page .hf-region-list::-webkit-scrollbar-track {
+    background: #0c141f;
+    border-radius: 6px;
+}
+
+.house-sale-page .hf-region-list::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 6px;
+}
+
+.house-sale-page .hf-region-list::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+.house-sale-page .hf-marz-item {
+    flex-shrink: 0;
+    min-height: 44px;
+    background: #182433;
+    border-radius: 9px;
+    overflow: hidden;
+    border: 1px solid #243447;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.house-sale-page .hf-marz-item.expanded {
+    border-color: #38bdf8;
+    box-shadow: 0 2px 10px rgba(56, 189, 248, 0.15);
+}
+
+.house-sale-page .hf-marz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    min-height: 44px;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease;
+}
+
+.house-sale-page .hf-marz-header:hover {
+    background: #1e2c3d;
+}
+
+.house-sale-page .hf-marz-title-group {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.house-sale-page .hf-marz-icon {
+    color: #38bdf8;
+}
+
+.house-sale-page .hf-marz-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.house-sale-page .hf-marz-count {
+    background: #243447;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 12px;
+}
+
+.house-sale-page .hf-marz-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.house-sale-page .hf-marz-select-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #243447;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .hf-marz-select-btn:hover {
+    background: #38bdf8;
+    color: #0f172a;
+    border-color: #38bdf8;
+}
+
+.house-sale-page .hf-marz-select-btn.selected {
+    background: #38bdf8;
+    color: #0f172a;
+    border-color: #38bdf8;
+}
+
+.house-sale-page .hf-marz-chevron {
+    color: #94a3b8;
+    transition: transform 0.2s ease;
+}
+
+.house-sale-page .hf-marz-chevron.open {
+    transform: rotate(180deg);
+}
+
+.house-sale-page .hf-cities-container {
+    background: #0f1724;
+    border-top: 1px solid #243447;
+    padding: 10px 12px;
+}
+
+.house-sale-page .hf-cities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.house-sale-page .hf-city-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #182433;
+    border: 1px solid #2a3a4d;
+    border-radius: 7px;
+    padding: 6px 11px;
+    color: #cbd5e1;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.house-sale-page .hf-city-chip:hover {
+    background: #233347;
+    color: #ffffff;
+    border-color: #38bdf8;
+    transform: translateY(-1px);
+}
+
+.house-sale-page .hf-city-chip.active {
+    background: #1e293b;
+    color: #38bdf8;
+    border-color: #38bdf8;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.house-sale-page .hf-city-check {
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+/* Map Box */
+.house-sale-page .hf-map-box {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #111a24;
+    margin-top: 10px;
+}
+
+.house-sale-page .hf-map-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.house-sale-page .hf-map-controls {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.house-sale-page .hf-map-zoom-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(23, 33, 43, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: all 0.15s;
+}
+
+.house-sale-page .hf-map-zoom-btn:hover {
+    background: #3390ec;
+    border-color: #3390ec;
+}
+
+.house-sale-page .hf-map-label-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(23, 33, 43, 0.92);
+    border: 1px solid rgba(51, 144, 236, 0.4);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom Text/Number Inputs */
+.house-sale-page .input-max-width {
+    max-width: 480px;
+}
+
+.house-sale-page .custom-input {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #0f172a;
+    border: 1.5px solid #334155;
+    border-radius: 8px;
+    color: #f8fafc;
+    padding: 11px 14px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .custom-input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.house-sale-page .custom-input.has-error {
+    border-color: #f43f5e;
+    box-shadow: 0 0 0 1px rgba(244, 63, 94, 0.3);
+}
+
+.house-sale-page .input-with-addon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.house-sale-page .input-addon-text {
+    position: absolute;
+    right: 14px;
+    font-size: 13.5px;
+    color: #64748b;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* Price Row with Currency Chips */
+.house-sale-page .price-row-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.house-sale-page .currency-chips-group {
+    display: flex;
+    gap: 6px;
+}
+
+.house-sale-page .currency-chip-btn {
+    background-color: #0f172a;
+    border: 1.5px solid #334155;
+    color: #cbd5e1;
+    padding: 9.5px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .currency-chip-btn:hover {
+    border-color: #38bdf8;
+    color: #ffffff;
+}
+
+.house-sale-page .currency-chip-btn.selected {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border-color: #38bdf8;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Custom Checkbox */
+.house-sale-page .custom-checkbox-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 4px;
+}
+
+.house-sale-page .custom-checkbox-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1.5px solid #64748b;
+    background-color: #0b1120;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 12px;
+}
+
+.house-sale-page .custom-checkbox-row:hover .custom-checkbox-box {
+    border-color: #38bdf8;
+}
+
+.house-sale-page .custom-checkbox-box.checked {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border-color: #38bdf8;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    transform: scale(1.06);
+    font-weight: bold;
+}
+
+.house-sale-page .checkbox-label-text {
+    font-size: 13.5px;
+    color: #cbd5e1;
+    transition: color 0.15s ease;
+}
+
+/* Error Text */
+.house-sale-page .error-text {
+    color: #fb7185;
+    font-size: 12.5px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Upload Dropzone */
+.house-sale-page .upload-dropzone {
+    border: 2px dashed #334155;
+    border-radius: 12px;
+    padding: 36px 20px;
+    text-align: center;
+    background-color: #0f172a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.house-sale-page .upload-dropzone:hover {
+    border-color: #38bdf8;
+    background-color: #131d33;
+}
+
+.house-sale-page .upload-dropzone.dragging {
+    border-color: #38bdf8;
+    background-color: rgba(56, 189, 248, 0.08);
+}
+
+.house-sale-page .upload-dropzone.has-error {
+    border-color: #f43f5e;
+}
+
+.house-sale-page .upload-icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #38bdf8;
+    margin-bottom: 12px;
+}
+
+.house-sale-page .upload-main-text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin-bottom: 4px;
+}
+
+.house-sale-page .upload-sub-text {
+    font-size: 12.5px;
+    color: #94a3b8;
+}
+
+/* Photos Preview Grid */
+.house-sale-page .photos-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.house-sale-page .photo-thumbnail-card {
+    position: relative;
+    width: 100%;
+    height: 105px;
+    border-radius: 9px;
+    overflow: hidden;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+}
+
+.house-sale-page .photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.house-sale-page .badge-main-photo {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    background-color: rgba(2, 132, 199, 0.9);
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+}
+
+.house-sale-page .btn-remove-photo {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s;
+}
+
+.house-sale-page .btn-remove-photo:hover {
+    background-color: #f43f5e;
+}
+
+/* Textarea */
+.house-sale-page .custom-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #0f172a;
+    border: 1.5px solid #334155;
+    border-radius: 8px;
+    color: #f8fafc;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .custom-textarea:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+/* Action Buttons Bar */
+.house-sale-page .form-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid #1f293d;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.house-sale-page .btn-cancel {
+    background: none;
+    border: 1.5px solid #334155;
+    color: #cbd5e1;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .btn-cancel:hover {
+    background-color: #1e293b;
+    color: #ffffff;
+    border-color: #64748b;
+}
+
+.house-sale-page .btn-draft {
+    background-color: #1e293b;
+    border: 1.5px solid #334155;
+    color: #cbd5e1;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .btn-draft:hover {
+    background-color: #273549;
+    color: #ffffff;
+    border-color: #64748b;
+}
+
+.house-sale-page .btn-preview {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border: none;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .btn-preview:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.5);
+}
+
+.house-sale-page .btn-publish {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: none;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    transition: all 0.15s ease;
+}
+
+.house-sale-page .btn-publish:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+}
+
+/* ==========================================================================
+   Preview Mode Styling
+   ========================================================================== */
+.house-sale-page .preview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.house-sale-page .preview-banner {
+    background-color: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.house-sale-page .preview-sparkle-icon {
+    flex-shrink: 0;
+}
+
+.house-sale-page .preview-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+}
+
+.house-sale-page .preview-item {
+    background-color: #0f172a;
+    border: 1px solid #1f293d;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.house-sale-page .preview-label {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.house-sale-page .preview-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.house-sale-page .preview-value.highlight-price {
+    color: #38bdf8;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.house-sale-page .preview-group-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+}
+
+.house-sale-page .badge-feature {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    font-size: 12.5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}

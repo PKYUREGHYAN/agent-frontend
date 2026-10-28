@@ -1,0 +1,688 @@
+/* ===================================================
+   HouseRentForm.css
+   Matches exact layout from screenshots with Telegram Dark styling
+   =================================================== */
+
+.house-rent-page {
+    min-height: 100vh;
+    background: #0e1621;
+    color: #ffffff;
+    padding: 24px 16px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.house-rent-container {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* Header_agency & Breadcrumb */
+.hr-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hr-back-btn {
+    background: #17212b;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hr-back-btn:hover {
+    background: #242f3d;
+    border-color: #3390ec;
+    color: #3390ec;
+}
+
+.hr-page-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.hr-page-title span.sep {
+    color: #7e94aa;
+    margin: 0 6px;
+    font-weight: 400;
+}
+
+/* Main Form Formats */
+.hr-form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.hr-section {
+    background: #17212b;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.hr-section-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hr-star {
+    color: #e53935;
+    font-weight: 700;
+}
+
+.hr-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #7e94aa;
+    color: #7e94aa;
+    font-size: 11px;
+    cursor: help;
+}
+
+/* Horizontal Field Rows */
+.hr-row {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.hr-row-top {
+    align-items: flex-start;
+}
+
+.hr-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #c4d3e3;
+    line-height: 1.4;
+}
+
+/* Input Fields */
+.hr-input {
+    width: 100%;
+    background: #242f3d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+.hr-input:focus {
+    border-color: #3390ec;
+    box-shadow: 0 0 0 3px rgba(51, 144, 236, 0.2);
+}
+
+.hr-unit-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.hr-unit-badge {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13.5px;
+    color: #7e94aa;
+    pointer-events: none;
+    font-weight: 600;
+}
+
+/* Radio Role Options */
+.hr-role-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hr-role-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    background: #1e2c3a;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: all 0.2s;
+}
+
+.hr-role-card:hover {
+    border-color: rgba(51, 144, 236, 0.45);
+    background: #233444;
+}
+
+.hr-role-card.active {
+    border-color: #3390ec;
+    background: rgba(51, 144, 236, 0.1);
+}
+
+.hr-radio-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #7e94aa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.hr-role-card.active .hr-radio-circle {
+    border-color: #3390ec;
+}
+
+.hr-radio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3390ec;
+}
+
+.hr-role-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hr-role-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.hr-role-desc {
+    font-size: 12px;
+    color: #7e94aa;
+    line-height: 1.4;
+}
+
+/* Custom Dropdown Trigger */
+.hr-dropdown-trigger {
+    background: #242f3d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ffffff;
+    user-select: none;
+    transition: border-color 0.2s;
+}
+
+.hr-dropdown-trigger:hover,
+.hr-dropdown-trigger.open {
+    border-color: #3390ec;
+}
+
+.hr-placeholder {
+    color: #7e94aa;
+}
+
+.hr-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #1e2c3a;
+    border: 1px solid rgba(51, 144, 236, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    z-index: 100;
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.hr-dropdown-item {
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: #e2e8f0;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.hr-dropdown-item:hover {
+    background: #3390ec;
+    color: #ffffff;
+}
+
+.hr-dropdown-item.selected {
+    background: rgba(51, 144, 236, 0.2);
+    color: #3390ec;
+    font-weight: 600;
+}
+
+/* Region Popover with Armenia Regions */
+.hr-region-popover {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #17212b;
+    border: 1px solid rgba(51, 144, 236, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
+    z-index: 110;
+    padding: 12px;
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.hr-region-search {
+    width: 100%;
+    background: #242f3d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #ffffff;
+    font-size: 13px;
+    margin-bottom: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.hr-region-search:focus {
+    border-color: #3390ec;
+}
+
+.hr-region-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hr-marz-item {
+    background: #1e2c3a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.hr-marz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.hr-marz-header:hover {
+    background: #243546;
+}
+
+.hr-marz-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hr-marz-select-btn {
+    background: rgba(51, 144, 236, 0.2);
+    border: 1px solid #3390ec;
+    color: #3390ec;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 3px 8px;
+    cursor: pointer;
+}
+
+.hr-marz-select-btn:hover {
+    background: #3390ec;
+    color: #ffffff;
+}
+
+.hr-cities-container {
+    padding: 8px 12px 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.hr-cities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.hr-city-chip {
+    background: #242f3d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #c4d3e3;
+    font-size: 12px;
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.hr-city-chip:hover {
+    background: #2c3a4a;
+    color: #ffffff;
+    border-color: #3390ec;
+}
+
+.hr-city-chip.active {
+    background: #3390ec;
+    color: #ffffff;
+    border-color: #3390ec;
+}
+
+/* Pills & Number Selectors */
+.hr-pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hr-pill-btn {
+    background: #242f3d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #c4d3e3;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+
+.hr-pill-btn:hover {
+    background: #2c3a4a;
+    color: #ffffff;
+    border-color: rgba(51, 144, 236, 0.4);
+}
+
+.hr-pill-btn.active {
+    background: #3390ec;
+    border-color: #3390ec;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(51, 144, 236, 0.35);
+}
+
+/* Checkbox Single Row & Vertical Lists */
+.hr-checkbox-single {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #9cb1c9;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 4px;
+}
+
+.hr-checkbox-single input {
+    accent-color: #3390ec;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.hr-checkbox-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hr-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #e2e8f0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.hr-checkbox-item input {
+    accent-color: #3390ec;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Price & Currency Row */
+.hr-price-row {
+    display: grid;
+    grid-template-columns: 1fr 140px 140px;
+    gap: 10px;
+}
+
+.hr-select {
+    background: #242f3d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #ffffff;
+    font-size: 13.5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.hr-select:focus {
+    border-color: #3390ec;
+}
+
+/* Photos Dropzone & Preview */
+.hr-dropzone {
+    border: 2px dashed rgba(51, 144, 236, 0.35);
+    border-radius: 14px;
+    padding: 32px 20px;
+    text-align: center;
+    background: rgba(51, 144, 236, 0.04);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hr-dropzone:hover {
+    background: rgba(51, 144, 236, 0.08);
+    border-color: #3390ec;
+}
+
+.hr-dropzone-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+    color: #3390ec;
+}
+
+.hr-dropzone-text {
+    font-size: 14px;
+    color: #7e94aa;
+}
+
+.hr-dropzone-link {
+    color: #3390ec;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.hr-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.hr-photo-card {
+    position: relative;
+    width: 100%;
+    height: 110px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #111a24;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hr-photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hr-photo-del {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hr-photo-del:hover {
+    background: #e53935;
+}
+
+/* Contact options */
+.hr-contact-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hr-contact-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #1e2c3a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: #ffffff;
+    transition: border-color 0.2s;
+}
+
+.hr-contact-card:hover {
+    border-color: rgba(51, 144, 236, 0.4);
+}
+
+.hr-contact-card input[type="radio"] {
+    accent-color: #3390ec;
+    cursor: pointer;
+}
+
+/* Footer Bottom Actions */
+.hr-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hr-btn-cancel {
+    background: #242f3d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #c4d3e3;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hr-btn-cancel:hover {
+    background: #2c3a4a;
+    color: #ffffff;
+}
+
+.hr-btn-draft {
+    background: rgba(51, 144, 236, 0.12);
+    border: 1px solid rgba(51, 144, 236, 0.4);
+    color: #3390ec;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hr-btn-draft:hover {
+    background: rgba(51, 144, 236, 0.22);
+}
+
+.hr-btn-submit {
+    background: #3390ec;
+    border: none;
+    color: #ffffff;
+    padding: 12px 34px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(51, 144, 236, 0.4);
+    transition: all 0.2s;
+}
+
+.hr-btn-submit:hover {
+    background: #2b82db;
+    transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+    .hr-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .hr-price-row {
+        grid-template-columns: 1fr;
+    }
+    .hr-footer-actions {
+        flex-direction: column;
+    }
+    .hr-footer-actions button {
+        width: 100%;
+    }
+}

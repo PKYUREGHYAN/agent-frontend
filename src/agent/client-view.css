@@ -1,0 +1,739 @@
+/* ==========================================================================
+   AGENCY CLIENT VIEW & PROPERTY CARD - PREMIUM DARK THEME
+   Ֆայլի անվանումը՝ client-view.css
+   ========================================================================== */
+
+:root {
+    --cv-bg-main: #060b13;
+    --cv-bg-card: #091322;
+    --cv-bg-card-hover: #0c1a2e;
+    --cv-bg-surface: #0f1e34;
+    --cv-bg-input: #040913;
+
+    --cv-border-subtle: #162a42;
+    --cv-border-medium: #1e3a5f;
+    --cv-border-focus: #2563eb;
+
+    --cv-text-primary: #ffffff;
+    --cv-text-secondary: #94a3b8;
+    --cv-text-muted: #64748b;
+
+    --cv-accent-blue: #2563eb;
+    --cv-accent-blue-hover: #1d4ed8;
+    --cv-accent-cyan: #38bdf8;
+    --cv-accent-emerald: #10b981;
+    --cv-accent-emerald-hover: #059669;
+    --cv-accent-red: #ef4444;
+    --cv-accent-red-hover: #dc2626;
+
+    --cv-radius-sm: 8px;
+    --cv-radius-md: 10px;
+    --cv-radius-lg: 16px;
+    --cv-radius-pill: 9999px;
+
+    --cv-shadow-card: 0 20px 30px -10px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    --cv-shadow-glow-blue: 0 4px 16px rgba(37, 99, 235, 0.35);
+    --cv-shadow-glow-green: 0 4px 16px rgba(16, 185, 129, 0.35);
+}
+
+/* ==========================================================================
+   1. ԳԼԽԱՎՈՐ ԿՈՆՏԵՅՆԵՐ (MAIN CONTAINER)
+   ========================================================================== */
+.cv-page-container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 16px 90px 16px;
+    color: var(--cv-text-primary);
+    font-family: inherit;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. ՎԵՐԻՆ ԿԱՌԱՎԱՐՄԱՆ ՎԱՀԱՆԱԿ (TOP CONTROL PANEL)
+   ========================================================================== */
+.cv-top-panel-wrapper {
+    background: linear-gradient(180deg, #0a1628 0%, #08111f 100%);
+    border: 1px solid var(--cv-border-medium);
+    border-radius: var(--cv-radius-lg);
+    padding: 16px 22px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: var(--cv-shadow-card);
+    position: relative;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.cv-top-panel-wrapper:hover {
+    border-color: #244673;
+}
+
+.cv-badge-header-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.cv-black-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #000000;
+    border: 1px solid #2d3f56;
+    color: #f8fafc;
+    padding: 5px 14px;
+    border-radius: var(--cv-radius-pill);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cv-panel-subtitle {
+    font-size: 12.5px;
+    color: var(--cv-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.cv-panel-subtitle b {
+    color: #38bdf8;
+    font-weight: 800;
+}
+
+.cv-panel-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ==========================================================================
+   3. ՌԵԺԻՄՆԵՐԻ ՓՈԽԱՐԿԻՉ (MODE TOGGLE SWITCH)
+   ========================================================================== */
+.cv-mode-toggle-group {
+    display: inline-flex;
+    align-items: center;
+    background: #040810;
+    padding: 4px;
+    border-radius: var(--cv-radius-md);
+    border: 1px solid var(--cv-border-medium);
+    gap: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cv-btn-mode {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 16px;
+    border-radius: 9px;
+    border: none;
+    background: transparent;
+    color: var(--cv-text-secondary);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.cv-btn-mode:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.cv-btn-mode.active-edit {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    box-shadow: var(--cv-shadow-glow-blue);
+}
+
+.cv-btn-mode.active-preview {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: #ffffff;
+    box-shadow: var(--cv-shadow-glow-green);
+}
+
+/* ==========================================================================
+   4. ԿԻՍՎԵԼՈՒ ԵՎ ՄԵՍԵՆՋԵՐՆԵՐԻ ԿՈՃԱԿՆԵՐ (SHARE & MESSENGERS)
+   ========================================================================== */
+.cv-share-messengers-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cv-share-label {
+    font-size: 12px;
+    color: var(--cv-text-secondary);
+    font-weight: 700;
+}
+
+.cv-btn-copy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0f2038;
+    border: 1px solid #1f3e68;
+    color: var(--cv-accent-cyan);
+    padding: 6px 14px;
+    border-radius: var(--cv-radius-sm);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cv-btn-copy-link:hover {
+    background: #193863;
+    color: #ffffff;
+    border-color: #38bdf8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+}
+
+.cv-circle-icon-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    flex-shrink: 0;
+    padding: 0;
+    color: #ffffff !important;
+}
+
+.cv-circle-icon-btn svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    width: 19px;
+    height: 19px;
+    pointer-events: none;
+}
+
+.cv-circle-icon-btn:hover {
+    transform: scale(1.12) translateY(-2px);
+}
+
+.cv-circle-icon-btn.wa {
+    background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%);
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.4);
+}
+.cv-circle-icon-btn.wa:hover {
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+}
+
+.cv-circle-icon-btn.vb {
+    background: linear-gradient(135deg, #7b65ff 0%, #5d46e2 100%);
+    box-shadow: 0 2px 8px rgba(115, 96, 242, 0.4);
+}
+.cv-circle-icon-btn.vb:hover {
+    box-shadow: 0 6px 16px rgba(115, 96, 242, 0.6);
+}
+
+.cv-circle-icon-btn.tg {
+    background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
+    box-shadow: 0 2px 8px rgba(34, 158, 217, 0.4);
+}
+.cv-circle-icon-btn.tg:hover {
+    box-shadow: 0 6px 16px rgba(34, 158, 217, 0.6);
+}
+
+/* ==========================================================================
+   5. ԾԱԼԵԼՈՒ ԿԱՐՄԻՐ ՇԵՐՏ (COLLAPSE BAR)
+   ========================================================================== */
+.cv-red-toggle-bar {
+    width: 100%;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #f87171;
+    padding: 7px 14px;
+    border-radius: var(--cv-radius-sm);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.cv-red-toggle-bar:hover {
+    background: rgba(239, 68, 68, 0.16);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+}
+
+/* ==========================================================================
+   6. ՌԵԺԻՄԻ ԲԱՆՆԵՐՆԵՐ ԵՎ ԾԱՆՈՒՑՈՒՄՆԵՐ (STATUS BANNERS & TOASTS)
+   ========================================================================== */
+.cv-mode-info-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-radius: var(--cv-radius-md);
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    gap: 12px;
+    flex-wrap: wrap;
+    animation: fadeIn 0.3s ease;
+    box-sizing: border-box;
+}
+
+.cv-mode-info-banner.edit-mode {
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.18) 0%, rgba(37, 99, 235, 0.06) 100%);
+    border: 1px solid rgba(37, 99, 235, 0.45);
+    color: #93c5fd;
+}
+
+.cv-mode-info-banner.preview-mode {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0.06) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #6ee7b7;
+}
+
+/* ==========================================================================
+   7. ՊԱՀՊԱՆՄԱՆ ԿՈՃԱԿ (SAVE BUTTON)
+   ========================================================================== */
+.cv-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: #ffffff;
+    border: none;
+    padding: 9px 22px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: var(--cv-shadow-glow-green);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.cv-save-btn:hover {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+.cv-save-btn:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   8. ԽՄԲԱԳՐՎՈՂ ԴԱՇՏԵՐ (INPUTS & TEXTAREAS)
+   ========================================================================== */
+.cv-edit-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--cv-accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+}
+
+.cv-edit-input {
+    width: 100%;
+    background: var(--cv-bg-input);
+    border: 1px solid var(--cv-border-medium);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.cv-edit-input:hover {
+    border-color: #274b79;
+}
+
+.cv-edit-input:focus {
+    border-color: var(--cv-accent-blue);
+    background: #08111e;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.cv-edit-textarea {
+    width: 100%;
+    background: var(--cv-bg-input);
+    border: 1px solid var(--cv-border-medium);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.cv-edit-textarea:hover {
+    border-color: #274b79;
+}
+
+.cv-edit-textarea:focus {
+    border-color: var(--cv-accent-blue);
+    background: #08111e;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+/* ==========================================================================
+   9. ԼՈՒՍԱՆԿԱՐՆԵՐԻ ՑԱՆՑ ԵՎ ՔԱՐՏԵՐ (PHOTOS GRID & CARDS)
+   ========================================================================== */
+.cv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 18px;
+    box-sizing: border-box;
+}
+
+.cv-photo-card {
+    background: var(--cv-bg-card);
+    border: 1px solid var(--cv-border-subtle);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+.cv-photo-card:hover {
+    border-color: var(--cv-border-medium);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.6);
+}
+
+.cv-photo-frame {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #040810;
+    position: relative;
+}
+
+.cv-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.cv-photo-card:hover .cv-photo-frame img {
+    transform: scale(1.04);
+}
+
+.cv-photo-meta {
+    padding: 11px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--cv-text-secondary);
+    background: #0b172a;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Ջնջելու կոճակ նկարի վրա (Պակասեցնել) */
+.cv-photo-delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(220, 38, 38, 0.92);
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 6px 12px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+    z-index: 5;
+}
+
+.cv-photo-delete-btn:hover {
+    background: #ef4444;
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   10. ՆՈՐ ԼՈՒՍԱՆԿԱՐՆԵՐԻ ԲԼՈԿ
+   ========================================================================== */
+.cv-add-photo-box {
+    background: linear-gradient(180deg, #091527 0%, #060e1b 100%);
+    border: 1px solid #1c3658;
+    border-radius: var(--cv-radius-lg);
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+.cv-add-photo-box:hover {
+    border-color: #274b79;
+}
+
+.cv-upload-device-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #040913;
+    border: 1px solid var(--cv-border-subtle);
+    border-radius: 12px;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.cv-upload-device-btn {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    color: #ffffff;
+    padding: 9px 18px;
+    border-radius: 9px;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 3px 10px rgba(29, 78, 216, 0.35);
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.cv-upload-device-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(37, 99, 235, 0.45);
+}
+
+.cv-dynamic-input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 42px;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .cv-dynamic-input-row {
+        grid-template-columns: 1fr;
+        background: #050c17;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid #162a42;
+    }
+}
+
+.cv-row-field-group {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.cv-row-field-icon-wrapper {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+    color: var(--cv-accent-cyan);
+}
+
+.cv-row-input {
+    width: 100%;
+    height: 44px;
+    background: #040913;
+    border: 1px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 0 14px;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 500;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.cv-row-input:hover {
+    border-color: #274b79;
+}
+
+.cv-row-input:focus {
+    border-color: var(--cv-accent-blue);
+    background: #071222;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.cv-row-input::placeholder {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.cv-row-input-with-icon {
+    padding-left: 42px !important;
+}
+
+.cv-row-remove-btn {
+    width: 42px;
+    height: 44px;
+    min-width: 42px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #f87171;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.cv-row-remove-btn:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: #ef4444;
+    color: #ffffff;
+    transform: scale(1.04);
+}
+
+.cv-row-remove-btn:active {
+    transform: scale(0.98);
+}
+
+.cv-dynamic-actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 10px;
+}
+
+.cv-btn-add-more-rows {
+    background: #0a1b30;
+    color: #38bdf8;
+    border: 1px solid #1e4270;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.cv-btn-add-more-rows:hover {
+    background: #112948;
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.cv-btn-apply-rows {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 24px;
+    font-weight: 800;
+    font-size: 13.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.cv-btn-apply-rows:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5);
+}
+
+.cv-btn-apply-rows:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   11. ԳՈՒՅՔԻ ՀԻՄՆԱԿԱՆ ՔԱՐՏ (MAIN PROPERTY CARD)
+   ========================================================================== */
+.cv-main-property-card {
+    background: linear-gradient(180deg, #091426 0%, #07101e 100%);
+    border: 1px solid var(--cv-border-medium);
+    border-radius: var(--cv-radius-lg);
+    padding: 28px;
+    color: #ffffff;
+    box-shadow: var(--cv-shadow-card);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Անիմացիա */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
