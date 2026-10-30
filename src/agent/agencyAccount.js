@@ -55,10 +55,10 @@ export async function sendAgencyKeysToGmail(email) {
             body: JSON.stringify({ email: cleanEmail }),
         });
         const data = await response.json().catch(() => ({}));
-        if (!response.ok || !data.success) {
+        if (!response.ok || !data.success || data.delivery === "telegram-director" || data.delivery === "local") {
             return { ok: false, message: data.message || "Կոդը չհաջողվեց ուղարկել Gmail" };
         }
-        return { ok: true, message: data.message };
+        return { ok: true, message: data.message || "Կոդերը ուղարկվեցին ձեր Gmail-ին։ Բացեք փոստը։" };
     } catch {
         return { ok: false, message: "Կոդը չհաջողվեց ուղարկել Gmail" };
     }
