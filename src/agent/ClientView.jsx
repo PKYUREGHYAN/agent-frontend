@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopControlPanel from './TopControlPanel.jsx';
 import { Save, Check, Trash2 } from 'lucide-react';
-import { createShareLink } from './agencyAccount.js';
+import { createShareLink, getAgencySession, persistAgencyListing } from './agencyAccount.js';
 import ShareListingCard from './ShareListingCard.jsx';
 import './client-view.css';
 import { I18nTree } from '../i18n/I18n.jsx';
@@ -18,17 +18,13 @@ export default function ClientView({
     // Ռեժիմ՝ 'edit' | 'preview'
     const [mode, setMode] = useState('edit');
 
-    const [propertyTitle, setPropertyTitle] = useState(
-        listingData?.title || '1-комн. кв. • 46 м² • 17/22 этаж'
-    );
+    const [propertyTitle, setPropertyTitle] = useState(listingData?.title || '');
+    const [photos, setPhotos] = useState(() => listingData?.photos || []);
 
-    const [photos, setPhotos] = useState(() => {
-        return listingData?.photos || [
-            { id: 1, src: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80', title: 'Ванная комната' },
-            { id: 2, src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80', title: 'Гостиная зона' },
-            { id: 3, src: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80', title: 'Кухня и столовая' },
-        ];
-    });
+    useEffect(() => {
+        setPropertyTitle(listingData?.title || '');
+        setPhotos(listingData?.photos || []);
+    }, [listingData]);
 
     const [isSaved, setIsSaved] = useState(false);
     const [saveMessage, setSaveMessage] = useState('');
@@ -43,25 +39,23 @@ export default function ClientView({
         setIsSaved(false);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         const updated = {
             ...(listingData || {}),
             title: propertyTitle,
             photos: photos
         };
 
-        try {
-            localStorage.setItem(`agency_photos_${listingData?.id || 'default'}`, JSON.stringify(updated));
-        } catch (e) {
-            console.error(e);
-        }
-
         if (onUpdateListing) {
             onUpdateListing(updated);
         }
 
-        setIsSaved(true);
-        setSaveMessage('✓ Фотографии и подписи успешно сохранены!');
+        const session = getAgencySession();
+        const result = await persistAgencyListing(updated, session?.email);
+        setIsSaved(Boolean(result.ok));
+        setSaveMessage(result.ok
+            ? '✓ Պահպանվեց բազայում'
+            : '✗ Բազայում պահելը չհաջողվեց');
         setTimeout(() => setSaveMessage(''), 3500);
     };
 

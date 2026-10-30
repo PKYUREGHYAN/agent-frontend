@@ -20,7 +20,8 @@ function serviceOrigin(port, envValue) {
 }
 
 export const AUTH_API_URL = `${serviceOrigin(5000, import.meta.env.VITE_AUTH_API_URL)}/api/auth`;
-export const AI_API_URL = `${serviceOrigin(8000, import.meta.env.VITE_AI_API_URL)}/api/ai`;
+// Browser calls Node /api/ai; Node proxies to local Python :8000 (never expose :8000 in the browser).
+export const AI_API_URL = `${serviceOrigin(5000, import.meta.env.VITE_AI_API_URL || import.meta.env.VITE_AUTH_API_URL)}/api/ai`;
 export const TELEGRAM_API_URL = `${serviceOrigin(5000, import.meta.env.VITE_AUTH_API_URL)}/api/telegram`;
 export const AGENCY_API_URL = `${serviceOrigin(5000, import.meta.env.VITE_AUTH_API_URL)}/api/agency`;
 export const ADMIN_API_URL = `${serviceOrigin(5000, import.meta.env.VITE_AUTH_API_URL)}/api/admin`;

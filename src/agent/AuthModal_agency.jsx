@@ -51,6 +51,7 @@ export default function AuthModal_agency({
     };
 
     return (
+        <I18nTree>
         <div className="az-modal-overlay" onClick={onClose}>
             <div className="az-modal-card" onClick={(e) => e.stopPropagation()}>
                 <button
@@ -136,5 +137,6 @@ export default function AuthModal_agency({
                 </div>
             </div>
         </div>
+        </I18nTree>
     );
 }

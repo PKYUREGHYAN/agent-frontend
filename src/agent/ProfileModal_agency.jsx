@@ -36,6 +36,7 @@ export default function ProfileModal({
     };
 
     return (
+        <I18nTree>
         <div className="az-modal-overlay" onClick={onClose}>
             <div className="az-profile-card" onClick={(e) => e.stopPropagation()}>
                 {/* Փակման X կոճակ */}
@@ -166,5 +167,6 @@ export default function ProfileModal({
                 </div>
             </div>
         </div>
+        </I18nTree>
     );
 }

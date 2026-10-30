@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { authFetch } from '../services/sessionAuth.js';
 import { AGENCY_API_URL, ADMIN_API_URL } from '../services/api.js';
 import { publicShareUrl } from '../agent/agencyAccount.js';
-import { PACKAGES, fetchAgencyCatalog } from '../agent/packages.js';
+import { fetchAgencyCatalog } from '../agent/packages.js';
 import {
     Search,
     CheckCircle2,
@@ -16,82 +16,12 @@ import {
     X,
     Check,
     Percent,
-    Sparkles
+    Sparkles,
+    Trash2
 } from 'lucide-react';
 import './TodoListAdmin.css';
-import { I18nTree, LanguageSwitch } from '../i18n/I18n.jsx';
+import { I18nTree } from '../i18n/I18n.jsx';
 import BrandLogo from '../brand/BrandLogo.jsx';
-
-export { PACKAGES };
-
-// Սկզբնական դեմո մարդիկ
-const INITIAL_DEMO_USERS = [
-    {
-        id: 'usr-1',
-        name: 'Արմեն Ղազարյան',
-        email: 'armen.realty@gmail.com',
-        firstId: 'AG-1ST-8821',
-        secondId: 'AG-2ND-8821',
-        registeredDate: '2026-09-20',
-        activePackageId: 'pkg_50',
-        activePackageName: '50 հայտարարություն (4,200 դրամ)',
-        remainingListings: 50,
-        paidAmountAMD: 4200,
-        pendingSelectedPackageId: 'pkg_50'
-    },
-    {
-        id: 'usr-2',
-        name: 'Աննա Պետրոսյան',
-        email: 'anna.agent@gmail.com',
-        firstId: 'AG-1ST-5510',
-        secondId: 'AG-2ND-5510',
-        registeredDate: '2026-09-21',
-        activePackageId: 'pkg_10',
-        activePackageName: '10 հայտարարություն (750 դրամ)',
-        remainingListings: 10,
-        paidAmountAMD: 750,
-        pendingSelectedPackageId: 'pkg_10'
-    },
-    {
-        id: 'usr-3',
-        name: 'Դավիթ Սարգսյան',
-        email: 'davit.broker@gmail.com',
-        firstId: 'AG-1ST-9904',
-        secondId: 'AG-2ND-9904',
-        registeredDate: '2026-09-22',
-        activePackageId: 'pkg_1',
-        activePackageName: '1 հայտարարություն (99 դրամ)',
-        remainingListings: 1,
-        paidAmountAMD: 99,
-        pendingSelectedPackageId: 'pkg_1'
-    },
-    {
-        id: 'usr-4',
-        name: 'Մարիամ Գրիգորյան',
-        email: 'mariam.grigoryan@gmail.com',
-        firstId: 'AG-1ST-3341',
-        secondId: 'AG-2ND-3341',
-        registeredDate: '2026-09-22',
-        activePackageId: null,
-        activePackageName: null,
-        remainingListings: 0,
-        paidAmountAMD: 0,
-        pendingSelectedPackageId: null
-    },
-    {
-        id: 'usr-5',
-        name: 'Գոռ Հակոբյան',
-        email: 'gor.hakobyan77@gmail.com',
-        firstId: 'AG-1ST-1192',
-        secondId: 'AG-2ND-1192',
-        registeredDate: '2026-09-19',
-        activePackageId: null,
-        activePackageName: null,
-        remainingListings: 0,
-        paidAmountAMD: 0,
-        pendingSelectedPackageId: null
-    }
-];
 
 export default function TodoListAdmin({ onBack, user = null, appLocked = false, onAppLockChange }) {
     const [users, setUsers] = useState([]);
@@ -103,33 +33,16 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
     const [toastMessage, setToastMessage] = useState('');
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-    // 1. Ակտիվ հաստատված զեղչ (%-ով)
-    const [discountPercent, setDiscountPercent] = useState(() => {
-        try {
-            const saved = localStorage.getItem('agent1_agency_discount_percent');
-            if (saved) {
-                const parsed = parseInt(saved, 10);
-                if (!isNaN(parsed) && parsed >= 0) return parsed;
-            }
-        } catch (e) {
-            // ignore
-        }
-        return 0;
-    });
+    // Զեղչը գալիս է միայն բազայից (/catalog)
+    const [discountPercent, setDiscountPercent] = useState(0);
+    const [inputDiscount, setInputDiscount] = useState(0);
 
-    // 2. Մուտքագրվող նախնական զեղչի դաշտ (մինչև «Հաստատել» սեղմելը)
-    const [inputDiscount, setInputDiscount] = useState(() => {
-        try {
-            const saved = localStorage.getItem('agent1_agency_discount_percent');
-            if (saved) {
-                const parsed = parseInt(saved, 10);
-                if (!isNaN(parsed) && parsed >= 0) return parsed;
-            }
-        } catch (e) {
-            // ignore
-        }
-        return 0;
-    });
+    const [catalogPackages, setCatalogPackages] = useState([]);
+    const [priceDraft, setPriceDraft] = useState({});
+
+    const livePackages = catalogPackages;
+    const findLivePackage = (packageId) =>
+        livePackages.find((pkg) => pkg.id === packageId);
 
     const isSuperAdmin = user?.role === 'super_admin';
 
@@ -161,11 +74,6 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
         const saved = Number(data.discountPercent ?? num);
         setDiscountPercent(saved);
         setInputDiscount(saved);
-        try {
-            localStorage.setItem('agent1_agency_discount_percent', saved.toString());
-        } catch {
-            // ignore
-        }
         return response.ok;
     };
 
@@ -180,6 +88,37 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
     const handleRemoveDiscount = async () => {
         const ok = await persistDiscount(0);
         showToast(ok ? '✓ Զեղչը չեղարկվեց (0% ստանդարտ գներ)' : 'Զեղչը չհաջողվեց պահել բազայում');
+    };
+
+    const handleSavePrices = async () => {
+        const prices = Object.fromEntries(
+            livePackages.map((pkg) => {
+                const value = Number(priceDraft[pkg.id]);
+                return [pkg.id, Number.isFinite(value) && value >= 0 ? Math.round(value) : pkg.priceAMD];
+            })
+        );
+
+        const response = await authFetch(`${AGENCY_API_URL}/prices`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prices }),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.success) {
+            showToast(data.message || 'Գները չհաջողվեց պահել բազայում');
+            return;
+        }
+
+        const nextPackages = Array.isArray(data.packages) && data.packages.length
+            ? data.packages
+            : livePackages;
+        setCatalogPackages(nextPackages);
+        setPriceDraft(Object.fromEntries(nextPackages.map((pkg) => [pkg.id, pkg.priceAMD])));
+        if (typeof data.discountPercent === 'number') {
+            setDiscountPercent(data.discountPercent);
+            setInputDiscount(data.discountPercent);
+        }
+        showToast('✓ Փաթեթների գները պահպանվեցին բազայում');
     };
 
     // Մոդալ հաստատման համար
@@ -223,6 +162,12 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
         fetchAgencyCatalog().then((catalog) => {
             setDiscountPercent(catalog.discountPercent || 0);
             setInputDiscount(catalog.discountPercent || 0);
+            if (Array.isArray(catalog.packages) && catalog.packages.length) {
+                setCatalogPackages(catalog.packages);
+                setPriceDraft(
+                    Object.fromEntries(catalog.packages.map((pkg) => [pkg.id, pkg.priceAMD]))
+                );
+            }
         });
     }, []);
 
@@ -242,14 +187,14 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
 
     // Բացել հաստատման մոդալը
     const handleOpenConfirmModal = (user, packageId) => {
-        const pkg = PACKAGES.find(p => p.id === packageId);
+        const pkg = findLivePackage(packageId);
         if (!pkg) return;
         setConfirmModalData({ user, packageType: pkg });
     };
 
     // Հաստատել & ակտիվացնել փաթեթը
     const executeConfirmActivation = async (userId, packageId) => {
-        const pkg = PACKAGES.find(p => p.id === packageId);
+        const pkg = findLivePackage(packageId);
         if (!pkg) return;
 
         const response = await authFetch(`${AGENCY_API_URL}/agents/activate`, {
@@ -275,6 +220,29 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
         showToast(`✓ ՀԱՍՏԱՏՎԵՑ․ «${pkg.name}» (${pkg.priceDisplay}) պահվեց բազայում [${data.user?.secondId}]`);
     };
 
+    const handleDeleteUser = async (user) => {
+        const ok = window.confirm(
+            `Հեռացնե՞լ օգտատիրոջը՝ ${user.name || user.email}։ Այս գործողությունը հետ չի բերվում։`
+        );
+        if (!ok) {
+            return;
+        }
+
+        const response = await authFetch(`${AGENCY_API_URL}/agents/delete`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: user.id }),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.success) {
+            showToast(data.message || 'Օգտատիրոջը չհաջողվեց հեռացնել');
+            return;
+        }
+
+        setUsers((prev) => prev.filter((item) => item.id !== user.id));
+        showToast('✓ Օգտատերը հեռացվեց');
+    };
+
     const handleCancelPackage = async (userId) => {
         const targetUser = users.find(u => u.id === userId);
         await authFetch(`${AGENCY_API_URL}/agents/cancel`, {
@@ -293,7 +261,7 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
             return;
         }
 
-        const selectedPkg = PACKAGES.find(p => p.id === newUserInitialPkg);
+        const selectedPkg = findLivePackage(newUserInitialPkg);
         const response = await authFetch(`${AGENCY_API_URL}/agents`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -332,10 +300,19 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
         }
     };
 
-    // Վերականգնել դեմոն
-    const handleResetDemo = () => {
+    const handleRefreshFromDb = () => {
         loadUsers();
         loadShareLinks();
+        fetchAgencyCatalog().then((catalog) => {
+            setDiscountPercent(catalog.discountPercent || 0);
+            setInputDiscount(catalog.discountPercent || 0);
+            if (Array.isArray(catalog.packages)) {
+                setCatalogPackages(catalog.packages);
+                setPriceDraft(
+                    Object.fromEntries(catalog.packages.map((pkg) => [pkg.id, pkg.priceAMD]))
+                );
+            }
+        });
         showToast('✓ Բազայից թարմացվեց');
     };
 
@@ -383,13 +360,12 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
                                 <span className="badge-official">Official Rates</span>
                             </h1>
                             <p className="todo-subtitle">
-                                Ընտրեք փաթեթը (99֏ / 750֏ / 4,200֏) և սեղմեք <strong>«Հաստատել»</strong> կոճակը ակտիվացման համար
+                                Ընտրեք փաթեթը և սեղմեք <strong>«Հաստատել»</strong>։ Գները կարող եք փոխել ներքևում և պահել բազայում։
                             </p>
                         </div>
                     </div>
 
                     <div className="todo-header-actions">
-                        <LanguageSwitch compact />
                         {isSuperAdmin && (
                             <button
                                 type="button"
@@ -430,7 +406,7 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
                             <span>+ Ավելացնել մարդ</span>
                         </button>
 
-                        <button type="button" onClick={handleResetDemo} className="btn-reset-demo" title="Վերականգնել դեմոն">
+                        <button type="button" onClick={handleRefreshFromDb} className="btn-reset-demo" title="Թարմացնել բազայից">
                             <RefreshCw style={{ width: 16, height: 16 }} />
                         </button>
                     </div>
@@ -629,82 +605,93 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
                     </div>
                 </div>
 
-                {/* 3 ՓԱԹԵԹՆԵՐԻ ԳՆԱՑՈՒՑԱԿԸ */}
+                {/* 3 ՓԱԹԵԹՆԵՐԻ ԳՆԱՑՈՒՑԱԿԸ + ԽՄԲԱԳՐՈՒՄ */}
                 <div className="rates-grid">
-                    {/* 1 Объявление */}
-                    <div className="rate-card rate-card-1">
-                        <div>
-                            <span className="badge-pkg-1">1 объявление</span>
-                            <span className="rate-subtext">Մեկանգամյա հայտարարություն</span>
-                        </div>
-                        <div style={{ textAlign: 'right' }}>
-                            {discountPercent > 0 ? (
-                                <>
-                                    <div style={{ textDecoration: 'line-through', fontSize: '0.75rem', color: '#94a3b8' }}>
-                                        99 դրամ
-                                    </div>
-                                    <span className="rate-price-1" style={{ color: '#ef4444' }}>
-                                        {Math.round(99 * (1 - discountPercent / 100))} դրամ
-                                    </span>
-                                </>
-                            ) : (
-                                <span className="rate-price-1">99 դրամ</span>
-                            )}
-                            <span className="rate-per-unit">
-                                {discountPercent > 0 ? `${Math.round(99 * (1 - discountPercent / 100))} ֏ / հատ` : '99 ֏ / հատ'}
-                            </span>
-                        </div>
-                    </div>
+                    {livePackages.map((pkg) => {
+                        const draftPrice = Number(priceDraft[pkg.id] ?? pkg.priceAMD);
+                        const safePrice = Number.isFinite(draftPrice) && draftPrice >= 0
+                            ? Math.round(draftPrice)
+                            : pkg.priceAMD;
+                        const finalPrice = discountPercent > 0
+                            ? Math.round(safePrice * (1 - discountPercent / 100))
+                            : safePrice;
+                        const perItem = Math.round(finalPrice / Math.max(1, pkg.listingsCount));
+                        const rateClass = pkg.id === 'pkg_10'
+                            ? 'rate-card-10'
+                            : pkg.id === 'pkg_50'
+                                ? 'rate-card-50'
+                                : 'rate-card-1';
+                        const priceClass = pkg.id === 'pkg_10'
+                            ? 'rate-price-10'
+                            : pkg.id === 'pkg_50'
+                                ? 'rate-price-50'
+                                : 'rate-price-1';
 
-                    {/* 10 Объявление */}
-                    <div className="rate-card rate-card-10">
-                        <div>
-                            <span className="badge-pkg-10">10 объявление</span>
-                            <span className="rate-subtext">10 հատ մաքուր օբյեկտ</span>
-                        </div>
-                        <div style={{ textAlign: 'right' }}>
-                            {discountPercent > 0 ? (
-                                <>
-                                    <div style={{ textDecoration: 'line-through', fontSize: '0.75rem', color: '#94a3b8' }}>
-                                        750 դրամ
+                        return (
+                            <div key={pkg.id} className={`rate-card ${rateClass}`}>
+                                <div>
+                                    <span className={pkg.badgeClass}>{pkg.nameRu || pkg.name}</span>
+                                    <span className="rate-subtext">{pkg.name}</span>
+                                    <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            value={priceDraft[pkg.id] ?? pkg.priceAMD}
+                                            onChange={(e) => {
+                                                const next = e.target.value;
+                                                setPriceDraft((prev) => ({
+                                                    ...prev,
+                                                    [pkg.id]: next === '' ? '' : Math.max(0, Number(next) || 0),
+                                                }));
+                                            }}
+                                            style={{
+                                                width: 110,
+                                                padding: '7px 10px',
+                                                borderRadius: 8,
+                                                border: '1px solid #334155',
+                                                background: '#091322',
+                                                color: '#fff',
+                                                fontWeight: 800,
+                                            }}
+                                            title="Փոխել փաթեթի գինը (դրամ)"
+                                        />
+                                        <span style={{ color: '#94a3b8', fontSize: 12, fontWeight: 700 }}>դրամ</span>
                                     </div>
-                                    <span className="rate-price-10" style={{ color: '#ef4444' }}>
-                                        {Math.round(750 * (1 - discountPercent / 100))} դրամ
+                                </div>
+                                <div style={{ textAlign: 'right' }}>
+                                    {discountPercent > 0 ? (
+                                        <>
+                                            <div style={{ textDecoration: 'line-through', fontSize: '0.75rem', color: '#94a3b8' }}>
+                                                {safePrice.toLocaleString('hy-AM')} դրամ
+                                            </div>
+                                            <span className={priceClass} style={{ color: '#ef4444' }}>
+                                                {finalPrice.toLocaleString('hy-AM')} դրամ
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <span className={priceClass}>
+                                            {safePrice.toLocaleString('hy-AM')} դրամ
+                                        </span>
+                                    )}
+                                    <span className="rate-per-unit">
+                                        {perItem} ֏ / հատ
                                     </span>
-                                </>
-                            ) : (
-                                <span className="rate-price-10">750 դրամ</span>
-                            )}
-                            <span className="rate-per-unit">
-                                {discountPercent > 0 ? `${Math.round(750 * (1 - discountPercent / 100) / 10)} ֏ / հատ` : '75 ֏ / հատ'}
-                            </span>
-                        </div>
-                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
 
-                    {/* 50 Объявление */}
-                    <div className="rate-card rate-card-50">
-                        <div>
-                            <span className="badge-pkg-50">50 объявление</span>
-                            <span className="rate-subtext">50 հատ մաքուր օբյեկտ</span>
-                        </div>
-                        <div style={{ textAlign: 'right' }}>
-                            {discountPercent > 0 ? (
-                                <>
-                                    <div style={{ textDecoration: 'line-through', fontSize: '0.75rem', color: '#94a3b8' }}>
-                                        4,200 դրամ
-                                    </div>
-                                    <span className="rate-price-50" style={{ color: '#ef4444' }}>
-                                        {Math.round(4200 * (1 - discountPercent / 100)).toLocaleString()} դրամ
-                                    </span>
-                                </>
-                            ) : (
-                                <span className="rate-price-50">4,200 դրամ</span>
-                            )}
-                            <span className="rate-per-unit">
-                                {discountPercent > 0 ? `${Math.round(4200 * (1 - discountPercent / 100) / 50)} ֏ / հատ` : '84 ֏ / հատ'}
-                            </span>
-                        </div>
-                    </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10, marginBottom: 8 }}>
+                    <button
+                        type="button"
+                        onClick={handleSavePrices}
+                        className="btn-add-user"
+                        style={{ background: '#1d4ed8', borderColor: '#60a5fa' }}
+                    >
+                        ✓ Պահպանել գները բազայում
+                    </button>
                 </div>
 
                 {/* ԻՆՖՈ ԲԼՈԿ */}
@@ -849,7 +836,7 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
 
                                             {/* 3 ԿՈՃԱԿՆԵՐ */}
                                             <div className="package-buttons-row">
-                                                {PACKAGES.map((pkg) => {
+                                                {livePackages.map((pkg) => {
                                                     const isSelected = (pendingId || confirmPkgId) === pkg.id;
                                                     const isCurrentActive = user.activePackageId === pkg.id;
 
@@ -896,6 +883,16 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
                                                     <span>Չեղարկել</span>
                                                 </button>
                                             )}
+
+                                            <button
+                                                type="button"
+                                                onClick={() => handleDeleteUser(user)}
+                                                className="btn-delete-user"
+                                                title="Հեռացնել օգտատիրոջը"
+                                            >
+                                                <Trash2 style={{ width: 14, height: 14 }} />
+                                                <span>Հեռացնել</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -1024,7 +1021,7 @@ export default function TodoListAdmin({ onBack, user = null, appLocked = false, 
                                         className="form-input"
                                     >
                                         <option value="none">Առանց փաթեթի (0 հայտարարություն)</option>
-                                        {PACKAGES.map(p => (
+                                        {livePackages.map(p => (
                                             <option key={p.id} value={p.id}>
                                                 {p.name} — {p.priceDisplay}
                                             </option>

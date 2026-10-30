@@ -12,9 +12,8 @@ import {
 } from 'lucide-react'
 
 import './Login.css'
-import { I18nTree, LanguageSwitch } from '../i18n/I18n.jsx'
-import InstallApp from '../pwa/InstallApp.jsx'
 import { AUTH_API_URL } from '../services/api.js'
+import { persistLoginSession } from '../services/sessionAuth.js'
 import { loadLoginDraft, saveLoginDraft } from '../services/uiSession.js'
 
 
@@ -250,40 +249,20 @@ function Login({
             // SAVE TOKENS
             // ---------------------------------------------------
 
-            if (rememberMe) {
+            const accessToken = data.accessToken || data.token
 
-                localStorage.setItem(
-                    'accessToken',
-                    data.accessToken
-                )
-
-                localStorage.setItem(
-                    'refreshToken',
-                    data.refreshToken
-                )
-
-                localStorage.setItem(
-                    'currentUser',
-                    JSON.stringify(data.user)
-                )
-
-            } else {
-
-                sessionStorage.setItem(
-                    'accessToken',
-                    data.accessToken
-                )
-
-                sessionStorage.setItem(
-                    'refreshToken',
-                    data.refreshToken
-                )
-
-                sessionStorage.setItem(
-                    'currentUser',
-                    JSON.stringify(data.user)
-                )
+            if (!accessToken || !data.refreshToken) {
+                setSuccess(false)
+                setMessage('Մուտքի token-ը չստացվեց')
+                return
             }
+
+            persistLoginSession({
+                accessToken,
+                refreshToken: data.refreshToken,
+                user: data.user,
+                remember: rememberMe,
+            })
 
 
             // ---------------------------------------------------
@@ -305,7 +284,7 @@ function Login({
 
                 onSuccess({
                     user: data.user,
-                    accessToken: data.accessToken,
+                    accessToken,
                     refreshToken: data.refreshToken,
                     rememberMe,
                 })
@@ -809,8 +788,6 @@ function Login({
                         </button>
 
                     </div>
-
-                    <InstallApp />
 
                 </div>
 

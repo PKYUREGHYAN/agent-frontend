@@ -628,6 +628,7 @@ export default function HouseSaleForm({ onBack, onSave }) {
     };
 
     return (
+        <I18nTree>
         <div className="house-sale-page">
 
             {toastMessage && (
@@ -2723,5 +2724,6 @@ export default function HouseSaleForm({ onBack, onSave }) {
 
 </div>
 </div>
+</I18nTree>
 );
 }

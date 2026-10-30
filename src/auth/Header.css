@@ -323,46 +323,89 @@
     transform: translateX(2px);
 }
 
-/* --- Ադապտիվ կարգավորումներ (Mobile) --- */
-@media (max-width: 650px) {
+/* --- Ադապտիվ կարգավորումներ (Mobile / Tablet) --- */
+@media (max-width: 900px) {
     .app-header {
-        padding: env(safe-area-inset-top) 14px 0;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: env(safe-area-inset-top, 0px) 16px 0;
         min-height: 64px;
     }
+
+    .header-user {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .app-header {
+        padding: env(safe-area-inset-top, 0px) 12px 0;
+        min-height: 60px;
+    }
+
     .header-brand-subtitle {
         display: none;
     }
+
     .header-user-info {
         display: none;
     }
+
     .header-logo {
-        gap: 10px;
+        gap: 8px;
+        min-width: 0;
+        flex: 1 1 auto;
     }
+
     .header-logo-badge {
         width: 36px;
         height: 36px;
+        flex-shrink: 0;
     }
+
     .header-logo-icon {
         width: 18px;
         height: 18px;
     }
+
     .header-brand-title {
-        font-size: 15px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+
     .header-user {
-        gap: 10px;
+        gap: 6px;
     }
+
     .header-profile {
         padding: 0;
         background: transparent;
         border: none;
+        flex-shrink: 0;
     }
+
     .header-avatar {
         width: 36px;
         height: 36px;
     }
+
     .logout-button {
-        padding: 7px 11px;
+        padding: 8px 10px;
         font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .logout-button span {
+        display: none;
     }
 }

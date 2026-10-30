@@ -9,7 +9,7 @@ import {
 import { AUTH_API_URL } from "../services/api.js";
 import { AGENCY_API_URL } from "../services/api.js";
 import { sendHouseListing } from "../services/sendHouseListing.js";
-import { startSessionKeepAlive } from "../services/sessionAuth.js";
+import { ensureAccessToken, startSessionKeepAlive } from "../services/sessionAuth.js";
 import { I18nTree } from "../i18n/I18n.jsx";
 
 const Login = lazy(() => import("./Login.jsx"));
@@ -98,16 +98,24 @@ function Auth() {
     useEffect(() => startSessionKeepAlive(), []);
 
     useEffect(() => {
-        const token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
-        if (!token) {
-            return;
-        }
+        let cancelled = false;
 
-        fetch(`${AUTH_API_URL}/me`, {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((response) => response.json())
+        ensureAccessToken()
+            .then((token) => {
+                if (!token || cancelled) {
+                    return null;
+                }
+
+                return fetch(`${AUTH_API_URL}/me`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+            })
+            .then((response) => (response ? response.json() : null))
             .then((data) => {
+                if (!data || cancelled) {
+                    return;
+                }
+
                 if (data.user?.role || data.user?.email) {
                     setCurrentUser((prev) => ({ ...prev, ...data.user }));
                     const storage = localStorage.getItem("currentUser") ? localStorage : sessionStorage;
@@ -116,6 +124,10 @@ function Auth() {
                 }
             })
             .catch(() => {});
+
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
     useEffect(() => {
@@ -257,7 +269,7 @@ function Auth() {
         if (appLocked && !isSuperAdmin) {
             return (
                 <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#060b13", color: "#fff", fontFamily: "Arial, sans-serif", padding: 24, textAlign: "center" }}>
-                    <I18nTree>Ծրագիրը արգելափակված է Super Admin-ի կողմից։</I18nTree>
+                    <I18nTree>Ծրագիրը արգելափակված է։</I18nTree>
                 </div>
             );
         }
@@ -271,7 +283,7 @@ function Auth() {
     if (appLocked && !isSuperAdmin && page !== "login" && page !== "register") {
         return (
             <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, background: "#060b13", color: "#fff", fontFamily: "Arial, sans-serif", padding: 24, textAlign: "center" }}>
-                <I18nTree>Ծրագիրը արգելափակված է Super Admin-ի կողմից։</I18nTree>
+                <I18nTree>Ծրագիրը արգելափակված է։</I18nTree>
                 <button type="button" onClick={handleLogout} style={{ background: "#1e3a5f", color: "#fff", border: "1px solid #3b82f6", borderRadius: 10, padding: "10px 18px", cursor: "pointer", fontWeight: 700 }}>
                     <I18nTree>Դուրս գալ</I18nTree>
                 </button>

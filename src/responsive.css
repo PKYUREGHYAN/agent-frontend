@@ -1,5 +1,17 @@
+/* =========================================================
+   Global responsive — all devices + portrait/landscape
+   Headers stay one row; content stacks cleanly without overlap
+   ========================================================= */
+
 html {
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 img,
@@ -47,28 +59,27 @@ textarea {
 .house-rent-page,
 .house-sale-page,
 .apartment-sale-page,
-.commercial-form-page {
+.commercial-form-page,
+.main-menu-wrapper,
+.main-menu-container,
+.login-page,
+.login-container {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  min-width: 0;
 }
 
-.app-header,
-.header-user,
-.agent-header-box,
-.agent-header-right,
-.menu-top-row,
-.search-bar-box,
-.cv-top-panel-wrapper,
-.cv-badge-header-row,
-.cv-share-messengers-group,
-.todo-header,
-.todo-header-actions,
-.pf-top-header,
-.pf-bottom-actions {
-  flex-wrap: wrap;
+/* Prevent flex children from forcing overflow */
+.app-header > *,
+.agent-header-box > *,
+.header-user > *,
+.todo-header > *,
+.menu-top-row > * {
+  min-width: 0;
 }
 
+/* ---------- Large tablet / small laptop ---------- */
 @media (max-width: 1280px) {
   .app-header {
     padding-left: 16px;
@@ -94,32 +105,44 @@ textarea {
     padding-right: 16px;
   }
 
-  .agent-header-box {
-    align-items: flex-start;
-    gap: 12px;
-  }
-
   .property-type-selection.has-subtypes,
   .property-type-selection {
     grid-template-columns: 1fr;
   }
+
+  .two-col-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
+/* ---------- Tablet / phone portrait ---------- */
 @media (max-width: 768px) {
-  .menu-top-row,
-  .todo-header,
-  .todo-header-actions,
+  /* Content sections may stack; HEADERS stay horizontal */
+  .todo-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .todo-header-actions {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
   .user-card,
   .user-info-section,
-  .header-user,
-  .app-header,
-  .agent-header-box,
   .search-bar-box,
   .cv-share-messengers-group,
   .pf-bottom-actions,
   .active-selection-banner {
+    flex-wrap: wrap;
+  }
+
+  .active-selection-banner {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
 
   .main-menu-container,
@@ -127,6 +150,28 @@ textarea {
   .login-container,
   .login-card {
     max-width: 100%;
+    width: 100%;
+  }
+
+  .login-card {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .choices-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .choice-card,
+  .image-preview-box,
+  .preview-img,
+  .slc-card {
+    max-width: 100%;
+  }
+
+  .image-preview-box {
+    overflow: hidden;
   }
 
   button,
@@ -138,18 +183,18 @@ textarea {
   .btn-start,
   .pf-btn-primary,
   .hf-btn-primary,
-  .hr-btn-submit {
+  .hr-btn-submit,
+  .agent-login-btn,
+  .agent-counter-btn,
+  .agent-profile-btn,
+  .agent-tariffs-btn,
+  .agent-logout-btn {
     min-height: 44px;
   }
 
   .search-input-field {
     min-width: 0;
     width: 100%;
-  }
-
-  .choices-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
   }
 
   .login-page {
@@ -165,8 +210,78 @@ textarea {
     display: none;
   }
 
-  .slc-card {
+  /* Auth header: one compact row */
+  .app-header {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 64px;
+  }
+
+  .header-user {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .header-user .lang-switch {
+    width: auto !important;
+    flex-shrink: 0;
+  }
+
+  .header-logo {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* Agency header: brand + actions, no vertical dump */
+  .agent-header-box {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .agent-header-left {
+    flex-direction: row !important;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .agent-header-right {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: auto;
     max-width: 100%;
+  }
+
+  .agent-header-right > button,
+  .agent-header-right > .agent-login-btn {
+    width: auto;
+  }
+
+  .menu-top-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .menu-top-row > div {
+    width: auto;
+    margin-left: 0 !important;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -206,6 +321,26 @@ textarea {
   .pf-price-input-row {
     flex-wrap: wrap;
   }
+
+  .logout-button span {
+    display: none;
+  }
+
+  .logout-button {
+    padding: 8px 10px;
+    min-width: 44px;
+    justify-content: center;
+  }
+
+  .agent-counter-btn span:first-child {
+    font-size: 11px;
+  }
+
+  .agent-profile-btn,
+  .agent-tariffs-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -227,13 +362,128 @@ textarea {
   }
 
   .app-header {
-    min-height: 64px;
+    min-height: 60px;
     gap: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
-  .lang-switch {
-    width: 100%;
-    justify-content: center;
+  .header-brand-title {
+    font-size: 14px;
+  }
+
+  .header-brand-chat {
+    font-size: 12px;
+  }
+
+  .agent-title-main {
+    font-size: 16px;
+  }
+
+  .agent-title-badge {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+
+  .agent-logo-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .login-page {
+    padding: 12px 10px 24px;
+  }
+
+  .login-card h1 {
+    font-size: 22px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .header-logo,
+  .header-brand-info,
+  .agent-text-group {
+    min-width: 0;
+  }
+
+  .todo-title-group h1 {
+    font-size: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .badge-official {
+    display: none;
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 360px) {
+  .header-brand-chat {
+    display: none;
+  }
+
+  .agent-title-badge {
+    display: none;
+  }
+
+  .header-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .lang-switch-compact .lang-btn {
+    min-width: 34px;
+    min-height: 30px;
+    padding: 3px 8px;
+  }
+}
+
+/* ---------- Landscape phones / short height ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-menu-wrapper,
+  .login-page,
+  .property-type-page {
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: 16px;
+    min-height: auto;
+  }
+
+  .app-header,
+  .agent-header-box {
+    min-height: 52px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .hero-section,
+  .how-it-works-card,
+  .property-type-card {
+    padding: 16px;
+  }
+
+  .choices-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .app-header,
+  .agent-header-box,
+  .header-user {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .login-showcase-banner {
+    display: none;
+  }
+
+  .two-col-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 

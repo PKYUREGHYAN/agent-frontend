@@ -58,6 +58,7 @@ export default function TopControlPanel({
     ];
 
     return (
+        <I18nTree>
         <div className="cv-top-panel-wrapper">
             {/* 1. Վերին բեյջ և տեքստ */}
             <div className="cv-badge-header-row">
@@ -181,5 +182,6 @@ export default function TopControlPanel({
                 {isPanelOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
         </div>
+        </I18nTree>
     );
 }

@@ -8,8 +8,9 @@ import {
 } from 'lucide-react'
 
 import './Register.css'
-import { I18nTree, LanguageSwitch } from '../i18n/I18n.jsx'
+import { I18nTree } from '../i18n/I18n.jsx'
 import { AUTH_API_URL } from '../services/api.js'
+import { persistLoginSession } from '../services/sessionAuth.js'
 import { loadRegisterDraft, saveRegisterDraft } from '../services/uiSession.js'
 
 
@@ -277,9 +278,20 @@ function Register({ onLogin, onSuccess }) {
             setSuccess(true)
             setMessage(`Բարի գալուստ, @${data.user.username}`)
 
-            localStorage.setItem('accessToken', data.accessToken)
-            localStorage.setItem('refreshToken', data.refreshToken)
-            localStorage.setItem('currentUser', JSON.stringify(data.user))
+            const accessToken = data.accessToken || data.token
+
+            if (!accessToken || !data.refreshToken) {
+                setSuccess(false)
+                setMessage('Մուտքի token-ը չստացվեց')
+                return
+            }
+
+            persistLoginSession({
+                accessToken,
+                refreshToken: data.refreshToken,
+                user: data.user,
+                remember: true,
+            })
 
             setUsername('')
             setEmail('')
@@ -290,7 +302,7 @@ function Register({ onLogin, onSuccess }) {
                 if (onSuccess) {
                     onSuccess({
                         user: data.user,
-                        accessToken: data.accessToken,
+                        accessToken,
                         refreshToken: data.refreshToken,
                     })
                     return
@@ -327,9 +339,6 @@ function Register({ onLogin, onSuccess }) {
     return (
         <I18nTree>
         <div className="login-page">
-            <div className="lang-switch-floating">
-                <LanguageSwitch />
-            </div>
 
             <div className="login-card">
 

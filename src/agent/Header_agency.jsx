@@ -1,6 +1,6 @@
 import React from 'react';
 import './header_agency.css';
-import { I18nTree, LanguageSwitch } from '../i18n/I18n.jsx';
+import { I18nTree } from '../i18n/I18n.jsx';
 import BrandLogo from '../brand/BrandLogo.jsx';
 
 /**
@@ -17,6 +17,7 @@ export default function Header_agency({
                                           onProfileClick
                                       }) {
     return (
+        <I18nTree>
         <header className="agent-header-box">
             {/* Ձախ կողմ՝ Լոգո և Անվանում */}
             <div className="agent-header-left">
@@ -105,5 +106,6 @@ export default function Header_agency({
                 )}
             </div>
         </header>
+        </I18nTree>
     );
 }

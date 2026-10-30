@@ -135,14 +135,40 @@ export async function consumeAgencySearch() {
 }
 
 export async function persistAgencyListing(listing, email) {
+    if (!listing?.id) {
+        return { ok: false };
+    }
+
     try {
-        await fetch(`${AGENCY_API_URL}/listings`, {
+        const response = await fetch(`${AGENCY_API_URL}/listings`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ listing, email }),
         });
+        const data = await response.json().catch(() => ({}));
+        return { ok: response.ok && Boolean(data.success), id: data.id };
     } catch {
-        // keep local copy even if API fails
+        return { ok: false };
+    }
+}
+
+export async function loadAgencyListing(itemId, email) {
+    if (!itemId) {
+        return null;
+    }
+
+    try {
+        const query = email ? `?email=${encodeURIComponent(email)}` : "";
+        const response = await fetch(
+            `${AGENCY_API_URL}/listings/${encodeURIComponent(itemId)}${query}`
+        );
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.listing) {
+            return null;
+        }
+        return data.listing;
+    } catch {
+        return null;
     }
 }
 

@@ -17,7 +17,7 @@ import "./MainMenu.css"
 // =========================================================
 
 import Header from "./Header.jsx"
-import { I18nTree, LanguageSwitch } from "../i18n/I18n.jsx"
+import { I18nTree } from "../i18n/I18n.jsx"
 import { ADMIN_API_URL } from "../services/api.js"
 import { authFetch } from "../services/sessionAuth.js"
 
@@ -65,14 +65,6 @@ export default function MainMenu({
         'main-menu-admin',
         false
     )
-    const [phoneUrl, setPhoneUrl] = useState('')
-
-    useEffect(() => {
-        fetch('/api/runtime')
-            .then((response) => response.json())
-            .then((data) => setPhoneUrl(data.phoneUrl || ''))
-            .catch(() => setPhoneUrl(''))
-    }, [])
 
 
     // =========================================================
@@ -285,6 +277,7 @@ export default function MainMenu({
     // =========================================================================
 
     return (
+        <I18nTree>
         <>
             {/* =========================================================
                 HEADER — ՑՈՒՑԱԴՐՎՈՒՄ Է ՄԻԱՅՆ ՀԻՄՆԱԿԱՆ ՄԵՆՅՈՒՈՒՄ
@@ -314,35 +307,17 @@ export default function MainMenu({
                         TOP ROW
                     ========================================================= */}
 
+                    {(isAdmin || isSuperAdmin) && (
                     <div
                         className="menu-top-row"
                         style={{
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'space-between',
+                            justifyContent: 'flex-end',
                             gap: '10px',
                             flexWrap: 'wrap'
                         }}
                     >
-
-                        <div className="system-indicator">
-
-                            <span className="pulsing-dot" />
-
-                            <span className="system-text">
-
-                                Agent 1 • համակարգիչ և հեռախոս
-                                {phoneUrl ? ` • ${phoneUrl}` : ''}
-
-                                {user?.email
-                                    ? ` • ${user.email}`
-                                    : ''
-                                }
-
-                            </span>
-
-                        </div>
-
 
                         <div
                             style={{
@@ -357,8 +332,6 @@ export default function MainMenu({
                             {/* =========================================================
                                 ⚡ ADMIN / SUPER ADMIN
                             ========================================================= */}
-
-                            <LanguageSwitch />
 
                             {isSuperAdmin && (
                                 <button
@@ -443,6 +416,7 @@ export default function MainMenu({
                         </div>
 
                     </div>
+                    )}
 
 
                     {/* =========================================================
@@ -866,5 +840,6 @@ export default function MainMenu({
 
             </div>
         </>
+        </I18nTree>
     )
 }

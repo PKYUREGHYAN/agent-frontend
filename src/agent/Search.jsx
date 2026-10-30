@@ -44,6 +44,7 @@ export default function Search({
     };
 
     return (
+        <I18nTree>
         <div className="search-component-wrapper">
             {/* 1. INPUT FORM */}
             <form onSubmit={handleSubmit} className="search-bar-box">
@@ -130,5 +131,6 @@ export default function Search({
                 )}
             </AnimatePresence>
         </div>
+        </I18nTree>
     );
 }

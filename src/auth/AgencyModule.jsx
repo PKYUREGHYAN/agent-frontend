@@ -7,15 +7,22 @@ import {
     getCurrentAgencyListing,
     updateSavedAgencyListing,
 } from "../agent/agencyListings.js";
+import { getAgencySession, persistAgencyListing } from "../agent/agencyAccount.js";
 
 export default function AgencyModule({ onBackToMainMenu }) {
     const [view, setView] = useState("home");
     const [currentListing, setCurrentListing] = useState(() => getCurrentAgencyListing());
 
+    const persistListing = (listing) => {
+        updateSavedAgencyListing(listing);
+        const session = getAgencySession();
+        void persistAgencyListing(listing, session?.email);
+    };
+
     const handleNavigateToListing = (payload) => {
         if (payload?.data) {
             setCurrentListing(payload.data);
-            updateSavedAgencyListing(payload.data);
+            persistListing(payload.data);
         }
         setView("listing");
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -44,7 +51,7 @@ export default function AgencyModule({ onBackToMainMenu }) {
     const handleUpdateListing = (nextData) => {
         setCurrentListing((prev) => {
             const merged = { ...(prev || {}), ...(nextData || {}) };
-            updateSavedAgencyListing(merged);
+            persistListing(merged);
             return merged;
         });
     };

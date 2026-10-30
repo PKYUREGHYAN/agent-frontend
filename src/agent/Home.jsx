@@ -19,7 +19,7 @@ import {
 import { AGENCY_API_URL } from '../services/api.js';
 import { fetchListAmListing } from './fetchListAm.js';
 import { saveAgencyListing } from './agencyListings.js';
-import { PACKAGES, fetchAgencyCatalog } from './packages.js';
+import { fetchAgencyCatalog } from './packages.js';
 import './home.css';
 import './pricing-modal.css';
 import { I18nTree, t } from '../i18n/I18n.jsx';
@@ -58,7 +58,7 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [isPackageEmptyOpen, setIsPackageEmptyOpen] = useState(false);
     const [discountPercent, setDiscountPercent] = useState(0);
-    const [catalogPackages, setCatalogPackages] = useState(PACKAGES);
+    const [catalogPackages, setCatalogPackages] = useState([]);
     const [agencyBotUrl, setAgencyBotUrl] = useState('');
 
     const applySession = (session) => {
@@ -82,7 +82,7 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
         });
         fetchAgencyCatalog().then((catalog) => {
             setDiscountPercent(Number(catalog.discountPercent || 0));
-            setCatalogPackages(catalog.packages || PACKAGES);
+            setCatalogPackages(Array.isArray(catalog.packages) ? catalog.packages : []);
         });
         const runtimeUrl = AGENCY_API_URL.replace(/\/api\/agency$/, '/api/runtime');
         fetch(runtimeUrl)
@@ -106,6 +106,7 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
         return base;
     };
 
+    // Empty package -> Agency bot first; from there user contacts director.
     const botPackageUrl = () => {
         const base = botBaseUrl();
         if (!base) {
@@ -116,7 +117,7 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
     };
 
     const openAgencyBotForPackage = () => {
-        const url = botPackageUrl();
+        const url = botPackageUrl() || botBaseUrl() || String(agencyBotUrl || '').trim();
         if (!url) {
             alert(t('Բոտը դեռ կարգավորված չէ։ Ավելացրեք TELEGRAM_AGENCY_BOT_TOKEN և TELEGRAM_AGENCY_BOT_USERNAME .env-ում։'));
             return;
@@ -128,7 +129,7 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
         setIsPackageEmptyOpen(true);
     };
 
-    // Պահպանում ենք LocalStorage-ում փոփոխությունների դեպքում
+    // Մնացորդը և փաթեթը գալիս են բազայից (agency_agents)
     const updateAuthState = (logged, count, email, session = null) => {
         setIsLoggedIn(logged);
         setRemainingCount(count);
@@ -136,15 +137,6 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
 
         if (session) {
             setUserData(session);
-        }
-
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('az_is_logged_in', String(logged));
-            localStorage.setItem('az_remaining_count', String(count));
-            localStorage.setItem('az_user_email', email);
-            if (session) {
-                localStorage.setItem('agent1_user_data', JSON.stringify(session));
-            }
         }
     };
 
@@ -277,6 +269,10 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
                         setIsPricingModalOpen(true);
                     }}
                     onTariffsClick={() => {
+                        if (Number(remainingCount || 0) <= 0) {
+                            openPackageEnded();
+                            return;
+                        }
                         setOpenAccordion('pricing');
                         setIsPricingModalOpen(true);
                     }}
@@ -597,6 +593,10 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
                 onClose={() => setIsPricingModalOpen(false)}
                 onSelectPlan={() => {
                     setIsPricingModalOpen(false);
+                    if (Number(remainingCount || 0) <= 0) {
+                        openPackageEnded();
+                        return;
+                    }
                     setOpenAccordion('pricing');
                     alert(t('Покажите админу 2-й ID. Он активирует этот пакет в базе.'));
                 }}
@@ -628,8 +628,12 @@ export default function Home({ onNavigateToListing, onBackToMainMenu }) {
                             ✕
                         </button>
                         <h3>Փաթեթը վերջացել է։ Ակտիվացրեք փաթեթը։</h3>
-                        <p>Բացեք գործակալության բոտը, ընտրեք փաթեթը, հետո սեղմեք «Ակտիվացնել փաթեթը»։</p>
-                        <button type="button" className="btn-tg package-ended-btn" onClick={openAgencyBotForPackage}>
+                        <p>Բացեք գործակալության բոտը (@Agent1AgencyBot), ընտրեք փաթեթը, հետո այնտեղից կապվեք տնօրենի հետ։</p>
+                        <button
+                            type="button"
+                            className="btn-tg package-ended-btn"
+                            onClick={openAgencyBotForPackage}
+                        >
                             📦 Բացել բոտը
                         </button>
                     </div>

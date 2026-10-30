@@ -12,7 +12,7 @@ import {
     Eye,
     Edit3
 } from 'lucide-react';
-import { createShareLink } from './agencyAccount.js';
+import { createShareLink, getAgencySession, persistAgencyListing } from './agencyAccount.js';
 import ShareListingCard from './ShareListingCard.jsx';
 import './client-view.css';
 import { I18nTree } from '../i18n/I18n.jsx';
@@ -29,30 +29,16 @@ export default function PropertyCardView({
     // Ռեժիմ՝ 'edit' (խմբագրում) | 'preview' (հաճախորդի տեսք)
     const [mode, setMode] = useState('edit');
 
-    // Լռելյայն տվյալներ
-    const defaultData = {
-        id: '331388161',
-        title: '3 սենյականոց բնակարան • 85 մ² • 5/14 հարկ • Նորակառույց',
-        price: '$145,000 (58,000,000 ֏)',
-        address: 'Հայաստան, Երևան, Կենտրոն, Արամի փողոց, 82',
-        description: 'Հայտարարության լուսանկարները Agent_1-ի կողմից մշակվել են: Հեռացված են List.am-ի բոլոր լոգոները, ջրանիշերը և հեռախոսահամարները: Լուսանկարները բարձր որակով պատրաստ են հաճախորդներին ուղարկելու կամ նոր հայտարարություն տեղադրելու համար:',
-        photos: [
-            { id: 1, src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80', title: 'Շենքի ճակատ' },
-            { id: 2, src: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80', title: 'Լողավազան և բակ' },
-            { id: 3, src: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80', title: 'Սանհանգույց' }
-        ]
+    const emptyCard = {
+        id: '',
+        title: '',
+        price: '',
+        address: '',
+        description: '',
+        photos: [],
     };
 
-    // Գույքի հիմնական state
-    const [formData, setFormData] = useState(() => {
-        try {
-            const saved = localStorage.getItem('agency_card_saved_data');
-            if (saved) return JSON.parse(saved);
-        } catch (e) {
-            console.error(e);
-        }
-        return listingData || defaultData;
-    });
+    const [formData, setFormData] = useState(() => listingData || emptyCard);
 
     useEffect(() => {
         if (listingData) {
@@ -63,20 +49,11 @@ export default function PropertyCardView({
     const [isSaved, setIsSaved] = useState(false);
     const [saveMessage, setSaveMessage] = useState('');
 
-    // Գոյություն ունեցող լուսանկարի հեռացում (Պակասեցնել քարտից)
     const handleDeletePhoto = (photoId) => {
-        setFormData(prev => {
-            const updated = {
-                ...prev,
-                photos: prev.photos.filter((p, idx) => (p.id ? p.id !== photoId : idx !== photoId))
-            };
-            try {
-                localStorage.setItem('agency_card_saved_data', JSON.stringify(updated));
-            } catch (err) {
-                console.error(err);
-            }
-            return updated;
-        });
+        setFormData(prev => ({
+            ...prev,
+            photos: (prev.photos || []).filter((p, idx) => (p.id ? p.id !== photoId : idx !== photoId))
+        }));
         setIsSaved(false);
         setSaveMessage('Фото удалено из карточки');
         setTimeout(() => setSaveMessage(''), 2500);
@@ -90,20 +67,17 @@ export default function PropertyCardView({
         setIsSaved(false);
     };
 
-    // Պահպանել (Save)
-    const handleSave = () => {
-        try {
-            localStorage.setItem('agency_card_saved_data', JSON.stringify(formData));
-        } catch (e) {
-            console.error(e);
-        }
-
+    const handleSave = async () => {
         if (onUpdateListing) {
             onUpdateListing(formData);
         }
 
-        setIsSaved(true);
-        setSaveMessage('✓ Все изменения успешно сохранены!');
+        const session = getAgencySession();
+        const result = await persistAgencyListing(formData, session?.email);
+        setIsSaved(Boolean(result.ok));
+        setSaveMessage(result.ok
+            ? '✓ Պահպանվեց բազայում'
+            : '✗ Բազայում պահելը չհաջողվեց');
         setTimeout(() => setSaveMessage(''), 3500);
     };
 

@@ -238,6 +238,7 @@ export default function ListingDemo({
     };
 
     return (
+        <I18nTree>
         <div className="listing-demo-container" style={{ position: 'relative' }}>
             {/* ՍՏԱՏՈՒՍ-ԲԱՐ */}
             <div className="status-bar-box">
@@ -480,5 +481,6 @@ export default function ListingDemo({
                 <span>Назад в панель</span>
             </button>
         </div>
+        </I18nTree>
     );
 }

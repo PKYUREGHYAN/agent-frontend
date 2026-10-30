@@ -27,18 +27,49 @@ export function getRefreshToken() {
     return localStorage.getItem("refreshToken") || sessionStorage.getItem("refreshToken");
 }
 
+function decodeJwtPayload(token) {
+    const segment = String(token || "").split(".")[1];
+
+    if (!segment) {
+        return null;
+    }
+
+    const base64 = segment.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
+    return JSON.parse(atob(padded));
+}
+
 function accessTokenExpiresAt(token) {
     if (!token) {
         return 0;
     }
 
     try {
-        const payload = JSON.parse(
-            atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
-        );
-        return payload.exp ? payload.exp * 1000 : 0;
+        const payload = decodeJwtPayload(token);
+        return payload?.exp ? payload.exp * 1000 : 0;
     } catch {
         return 0;
+    }
+}
+
+export function persistLoginSession({ accessToken, refreshToken, user, remember }) {
+    const store = remember ? localStorage : sessionStorage;
+    const other = remember ? sessionStorage : localStorage;
+
+    other.removeItem("accessToken");
+    other.removeItem("refreshToken");
+    other.removeItem("currentUser");
+
+    if (accessToken) {
+        store.setItem("accessToken", accessToken);
+    }
+
+    if (refreshToken) {
+        store.setItem("refreshToken", refreshToken);
+    }
+
+    if (user) {
+        store.setItem("currentUser", JSON.stringify(user));
     }
 }
 
@@ -84,8 +115,9 @@ export async function refreshSession() {
             });
 
             const data = await response.json().catch(() => ({}));
+            const nextAccessToken = data.accessToken || data.token;
 
-            if (!response.ok || !data.success || !data.accessToken) {
+            if (!response.ok || !data.success || !nextAccessToken) {
                 const invalid = response.status === 401;
 
                 if (invalid) {
@@ -113,7 +145,7 @@ export async function refreshSession() {
                 };
             }
 
-            saveSession(data.accessToken, data.refreshToken, data.user);
+            saveSession(nextAccessToken, data.refreshToken, data.user);
             return { ok: true, invalid: false };
         } catch {
             return { ok: false, invalid: false };

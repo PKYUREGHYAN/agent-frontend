@@ -111,7 +111,54 @@
 .todo-header-actions {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.625rem;
+}
+
+@media (max-width: 768px) {
+    .todo-header {
+        align-items: stretch;
+    }
+
+    .todo-header-left {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .todo-title-group {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+
+    .todo-title-group h1 {
+        flex-wrap: wrap;
+        line-height: 1.35;
+    }
+
+    .todo-header-actions {
+        width: 100%;
+    }
+
+    .todo-header-actions .btn-add-user {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .todo-container {
+        padding: 0.75rem;
+    }
+
+    .todo-brand-logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    .btn-back-home span {
+        display: none;
+    }
 }
 
 .btn-add-user {
@@ -643,6 +690,25 @@
 
 .btn-cancel-action:hover {
     background-color: rgba(244, 63, 94, 0.2);
+}
+
+.btn-delete-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background-color: rgba(127, 29, 29, 0.25);
+    color: #fca5a5;
+    border: 1px solid rgba(248, 113, 113, 0.45);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-delete-user:hover {
+    background-color: rgba(185, 28, 28, 0.4);
 }
 
 /* Մոդալ պատուհաններ */

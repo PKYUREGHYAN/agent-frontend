@@ -422,22 +422,82 @@
 }
 
 @media (max-width: 640px) {
+    .property-type-page {
+        align-items: flex-start;
+        padding: 16px 12px 28px;
+    }
+
     .property-type-card {
-        padding: 26px 18px;
-        border-radius: 20px;
+        padding: 20px 14px;
+        border-radius: 18px;
+        max-width: 100%;
+    }
+
+    .property-type-card.has-subtypes {
+        max-width: 100%;
+    }
+
+    .property-type-header {
+        margin-bottom: 18px;
     }
 
     .property-type-header h1 {
-        font-size: 22px;
+        font-size: 20px;
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+    }
+
+    .property-type-header p {
+        font-size: 13px;
+    }
+
+    .property-type-selection,
+    .property-type-selection.has-subtypes {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .selection-column {
+        min-height: 0;
+        padding: 14px 12px;
+        border-radius: 16px;
+    }
+
+    .selection-column h2 {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .selection-item {
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .selection-text {
+        flex: 1;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        line-height: 1.35;
+    }
+
+    .selection-tag {
+        flex-shrink: 0;
     }
 
     .property-type-footer {
         flex-direction: column;
         align-items: stretch;
+        gap: 12px;
     }
 
     .selection-status {
         justify-content: center;
+        flex-wrap: wrap;
+        text-align: center;
+        gap: 6px;
     }
 
     .property-type-footer-buttons {
@@ -446,13 +506,10 @@
         gap: 10px;
     }
 
-    .back-to-main-menu-button {
-        width: 100%;
-        justify-content: center;
-    }
-
+    .back-to-main-menu-button,
     .continue-button {
         width: 100%;
         justify-content: center;
+        min-height: 46px;
     }
 }

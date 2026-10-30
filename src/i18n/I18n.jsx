@@ -108,8 +108,13 @@ function translateTree(node, translate) {
 }
 
 export function I18nTree({ children }) {
-    const { t: translate } = useI18n();
-    return translateTree(children, translate);
+    const { t: translate, lang } = useI18n();
+    // Remount on language change so every page re-applies HY/RU dictionaries.
+    return (
+        <span key={lang} className="i18n-tree" style={{ display: "contents" }}>
+            {translateTree(children, translate)}
+        </span>
+    );
 }
 
 export function I18nProvider({ children }) {

@@ -649,6 +649,7 @@ export function CommercialHouseForm({ onBack, onSave }) {
         : null;
 
     return (
+        <I18nTree>
         <div className="commercial-form-page">
 
             {/* Toast */}
@@ -2947,6 +2948,7 @@ export function CommercialHouseForm({ onBack, onSave }) {
                 )}
             </div>
         </div>
+        </I18nTree>
     );
 }
 

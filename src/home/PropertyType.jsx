@@ -325,6 +325,7 @@ function PropertyType({
     // RENDER
     // =========================================================
     return (
+        <I18nTree>
         <div className="property-type-page">
 
             <div
@@ -683,6 +684,7 @@ function PropertyType({
             </div>
 
         </div>
+        </I18nTree>
     )
 }
 
